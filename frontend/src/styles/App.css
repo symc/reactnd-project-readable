@@ -1,0 +1,40 @@
+.postHeader {
+    font-weight: bold
+}
+
+.btn {
+    margin-left:2px;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.btn-toolbar {
+    margin-left: 5px;
+}
+
+.panel {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.postBanner {
+    margin-top: 10px;
+    margin-left: 5px;
+    font-family: "Courier New";
+}
+
+.voteButton {
+    margin-bottom: 2px;
+}
+
+.postAuthor {
+    font-weight: bold;
+    color: #0c9b24
+}
+
+.postCategory {
+    font-weight: bold;
+    color: #1c08d1;
+}
