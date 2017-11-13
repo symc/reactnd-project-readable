@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import '../styles/App.css';
 
 class App extends Component {
   render() {
+    console.log(this.props);
     return (
         <div className="App">
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="/">Readable</a>
+            <nav className="navbar navbar-inverse">
+                <div className="container-fluid">
+                    <div className="navbar-header">
+                        <a className="navbar-brand" href="/">Readable</a>
                     </div>
                     <button className="btn btn-success navbar-btn">Add new post</button>
                     <button className="btn btn-success navbar-btn">Add new category</button>
@@ -83,4 +85,19 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapDispatchToProps(dispatch) {
+    return {};
+}
+
+function mapStateToProps({categories, posts, comments}) {
+    return {
+        categories,
+        posts,
+        comments
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);
