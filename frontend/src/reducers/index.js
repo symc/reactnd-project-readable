@@ -6,20 +6,18 @@ import {
 
 
 const initialCategoriesState = {
-    categories: [
-        {
-          name: 'react',
-          path: 'react'
-        },
-        {
-          name: 'redux',
-          path: 'redux'
-        },
-        {
-          name: 'udacity',
-          path: 'udacity'
-        }
-    ]
+    "react": {
+        name: 'react',
+        path: 'react'
+    },
+    "redux": {
+        name: 'redux',
+        path: 'redux'
+    },
+    "udacity": {
+        name: 'udacity',
+        path: 'udacity'
+    }
   }
 
 function categories(state = initialCategoriesState, action) {

@@ -1,18 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Category from './Category';
 
 class CategoriesBar extends Component {
     render() {
+        const categoryIds = this.props.categoryIds;
+        console.log(categoryIds);
         return (
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
-                    <button className="btn btn-primary btn-sml navbar-btn">react</button>
-                    <button className="btn btn-primary btn-sml navbar-btn">redux</button>
-                    <button className="btn btn-primary btn-sml navbar-btn">udacity</button>
+                    {categoryIds.map((id) => (
+                        <Category id={id}/>
+                    ))}
                 </div>
             </nav>
         );
     }
 }
 
-export default CategoriesBar;
+function mapDispatchToProps(dispatch) {
+    return {};
+}
+
+function mapStateToProps({categories, posts, comments}) {
+    return {
+        categoryIds: Object.keys(categories)
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CategoriesBar);
