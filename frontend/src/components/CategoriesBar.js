@@ -5,12 +5,11 @@ import Category from './Category';
 class CategoriesBar extends Component {
     render() {
         const categoryIds = this.props.categoryIds;
-        console.log(categoryIds);
         return (
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
                     {categoryIds.map((id) => (
-                        <Category id={id}/>
+                        <Category key={id} id={id}/>
                     ))}
                 </div>
             </nav>

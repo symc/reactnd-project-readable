@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class NavigationBar extends Component {
     render() {
@@ -7,17 +8,28 @@ class NavigationBar extends Component {
         <nav className="navbar navbar-inverse">
                 <div className="container-fluid">
                     <div className="navbar-header">
-                        <a className="navbar-brand" href="/">Readable</a>
+                        <Link to="/" className="navbar-brand">Readable</Link>
                     </div>
-                    <button className="btn btn-success navbar-btn">Add new post</button>
-                    <button className="btn btn-success navbar-btn">Add new category</button>
-                    <button className="btn btn-warning navbar-btn">Sort posts by votes</button>
-                    <button className="btn btn-warning navbar-btn">Sort posts by dates</button>
-                    <button className="btn btn-warning navbar-btn">Sort posts by title</button>
+                    <Link to="/new/post" className="btn btn-success navbar-btn">Add new post</Link>
+                    <Link to="/new/category" className="btn btn-success navbar-btn">Add new category</Link>
+                    <Link to="/sortby/vote" className="btn btn-warning navbar-btn">Sort posts by votes</Link>
+                    <Link to="/sortby/date" className="btn btn-warning navbar-btn">Sort posts by dates</Link>
+                    <Link to="/sortby/title" className="btn btn-warning navbar-btn">Sort posts by title</Link>
                 </div>
             </nav>
         );
     }
 }
 
-export default NavigationBar;
+function mapDispatchToProps(dispatch) {
+    return {};
+}
+
+function mapStateToProps({categories, posts, comments}) {
+    return {};
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NavigationBar);

@@ -5,6 +5,7 @@ import Post from './Post';
 class PostList extends Component {
     render() {
         const postIds = this.props.postIds;
+        console.log(this.props);
         return (
             <div>
                 {postIds.map((id) => (

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Category extends Component {
     render() {
         const thisCategory = this.props.category;
+        const categoryPage = `/category/${thisCategory.name}`;
         return (
-            <button className="btn btn-primary btn-sml navbar-btn">
+            <Link to={categoryPage} className="btn btn-primary btn-sml navbar-btn">
                 {thisCategory.name}
-            </button>
+            </Link>
         );
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Post extends Component {
     commentString = (commentCount) => {
@@ -13,6 +14,7 @@ class Post extends Component {
     };
     render() {
         const thisPost = this.props.post;
+        const detailedPage = `/post/${this.props.post.id}`;
         return (
             <div className="panel panel-default">
                 <div className="panel-heading postHeader">{thisPost.title}</div>
@@ -37,7 +39,7 @@ class Post extends Component {
                         <button className="btn btn-danger btn-sm voteButton">-</button>
                     </div>
                     <div className="col-md-2">
-                        <a>See post details</a>                       
+                        <Link to={detailedPage}>See post details</Link>                       
                     </div>
                 </div>
             </div>
