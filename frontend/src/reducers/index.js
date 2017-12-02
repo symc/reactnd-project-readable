@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 
 import {
-   ADD_CATEGORY,
+   ADD_CATEGORY, 
+   CHANGE_SORTBY
 } from '../actions';
 
 
@@ -93,8 +94,25 @@ function comments(state = initialCommentsState, action) {
     }
 }
 
+const initialListState = {
+    sortBy : "votes",
+};
+
+function listState(state = initialListState, action) {
+    switch (action.type) {
+        case CHANGE_SORTBY:
+            return {
+                ...state,
+                sortBy: action.sortBy
+            }
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     categories,
     posts,
-    comments
+    comments,
+    listState
 });

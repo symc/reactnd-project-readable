@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
+import CategoriesBar from './CategoriesBar';
 import { connect } from 'react-redux';
 import Post from './Post';
 
 class PostList extends Component {
     render() {
         const postIds = this.props.postIds;
-        console.log(this.props);
         return (
             <div>
-                {postIds.map((id) => (
-                    <div key={id}>
-                        <Post id={id}/>
-                    </div>
-                ))}
+                <CategoriesBar />
+                <div>
+                    {postIds.map((id) => (
+                        <div key={id}>
+                            <Post id={id}/>
+                        </div>
+                    ))}
+                </div>
             </div>
         );
     }

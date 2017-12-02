@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { changeSortBy } from '../actions';
 
 class NavigationBar extends Component {
     render() {
+        console.log(this.props.sortBy);
+        const selectedSortMethod = `btn btn-info navbar-btn`;
+        const unselectedSortMethod = `btn btn-warning navbar-btn`;
+        const sortBy = this.props.sortBy;
         return (
         <nav className="navbar navbar-inverse">
                 <div className="container-fluid">
@@ -11,10 +16,27 @@ class NavigationBar extends Component {
                         <Link to="/" className="navbar-brand">Readable</Link>
                     </div>
                     <Link to="/new/post" className="btn btn-success navbar-btn">Add new post</Link>
-                    <Link to="/new/category" className="btn btn-success navbar-btn">Add new category</Link>
-                    <Link to="/sortby/vote" className="btn btn-warning navbar-btn">Sort posts by votes</Link>
-                    <Link to="/sortby/date" className="btn btn-warning navbar-btn">Sort posts by dates</Link>
-                    <Link to="/sortby/title" className="btn btn-warning navbar-btn">Sort posts by title</Link>
+                    <button 
+                        className={(sortBy === 'votes') ? 
+                            selectedSortMethod : unselectedSortMethod}
+                        onClick={() => this.props.changeSortBy({sortBy: 'votes'})}
+                    >
+                        Sort posts by votes
+                    </button>
+                    <button 
+                        className={(sortBy === 'dates') ? 
+                            selectedSortMethod : unselectedSortMethod}
+                        onClick={() => this.props.changeSortBy({sortBy: 'dates'})}
+                    >
+                        Sort posts by dates
+                    </button>
+                    <button 
+                        className={(sortBy === 'titles') ? 
+                            selectedSortMethod : unselectedSortMethod}
+                        onClick={() => this.props.changeSortBy({sortBy: 'titles'})}
+                    >
+                        Sort posts by title
+                    </button>
                 </div>
             </nav>
         );
@@ -22,11 +44,15 @@ class NavigationBar extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        changeSortBy: (newSortBy) => dispatch(changeSortBy(newSortBy))
+    };
 }
 
-function mapStateToProps({categories, posts, comments}) {
-    return {};
+function mapStateToProps({listState}) {
+    return {
+        sortBy: listState.sortBy
+    };
 }
 
 export default connect(
