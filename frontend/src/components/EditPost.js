@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class CreateCategory extends Component {
+class EditPost extends Component {
     render() {
+        const postID = this.props.match.params.idx;
         return (
-            <div>Page for creating a new category</div>
+            <div>Edit post form for {postID}</div>
         );
     }
 }
@@ -20,4 +21,4 @@ function mapStateToProps({categories, posts, comments}) {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(CreateCategory);
+)(EditPost);

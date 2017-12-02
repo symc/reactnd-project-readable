@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 class Category extends Component {
     render() {
         const thisCategory = this.props.category;
-        const categoryPage = `/category/${thisCategory.name}`;
+        const categoryPage = `/${thisCategory.name}`;
         return (
             <Link to={categoryPage} className="btn btn-primary btn-sml navbar-btn">
                 {thisCategory.name}

@@ -6,8 +6,8 @@ import { Route } from 'react-router-dom';
 import { withRouter, Switch } from 'react-router';
 import PostDetails from './PostDetails';
 import CreatePost from './CreatePost';
-import CreateCategory from './CreateCategory';
 import NotFound from './NotFound';
+import EditPost from './EditPost';
 import '../styles/App.css';
 
 class App extends Component {
@@ -18,10 +18,10 @@ class App extends Component {
             <NavigationBar/>
             <Switch>
                 <Route exact path = "/" component={PostList} />
-                <Route exact path = "/new/post" component={CreatePost} />
-                <Route exact path = "/new/category" component={CreateCategory} />
-                <Route path = "/post/:idx" component={PostDetails} />
-                <Route path = "/category/:name" component={PostList} />
+                <Route exact path = "/new/post" component={CreatePost} />               
+                <Route exact path = "/:category" component={PostList} />
+                <Route exact path = "/:category/:idx" component={PostDetails} />
+                <Route path = "/:category/:idx/edit" component={EditPost} />
                 <Route component={NotFound}/>
             </Switch>
         </div>

@@ -14,7 +14,8 @@ class Post extends Component {
     };
     render() {
         const thisPost = this.props.post;
-        const detailedPage = `/post/${this.props.post.id}`;
+        const detailsPage = `/${this.props.post.category}/${this.props.post.id}`;
+        const editPage = detailsPage + '/edit';
         return (
             <div className="panel panel-default">
                 <div className="panel-heading postHeader">{thisPost.title}</div>
@@ -35,11 +36,27 @@ class Post extends Component {
                         Vote: {thisPost.voteScore}
                     </div>
                     <div className="col-md-1">
-                        <button className="btn btn-success btn-sm voteButton">+</button>
-                        <button className="btn btn-danger btn-sm voteButton">-</button>
+                        <button className="btn btn-success btn-sm postButton">+</button>
+                        <button className="btn btn-danger btn-sm postButton">-</button>
                     </div>
-                    <div className="col-md-2">
-                        <Link to={detailedPage}>See post details</Link>                       
+                    <div className="col-md-3">
+                        <Link 
+                            className="btn btn-info btn-sm postButton" 
+                            to={detailsPage}
+                        >
+                            DETAILS
+                        </Link>                       
+                        <Link 
+                            className="btn btn-success btn-sm postButton" 
+                            to={editPage}
+                        >
+                            EDIT
+                        </Link>                       
+                        <button 
+                            className="btn btn-danger btn-sm postButton"
+                        >
+                            DELETE
+                        </button>                       
                     </div>
                 </div>
             </div>
