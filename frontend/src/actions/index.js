@@ -1,5 +1,7 @@
 export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const CHANGE_SORTBY = 'CHANGE_SORTBY';
+export const UPVOTE = 'UPVOTE';
+export const DOWNVOTE = 'DOWNVOTE';
 
 export function addCategory({name}){
     return {
@@ -14,3 +16,17 @@ export function changeSortBy({sortBy}) {
         sortBy
     }
 };
+
+export function upvote({id}) {
+    return {
+        type: UPVOTE,
+        id
+    }
+};
+
+export function downvote({id}) {
+    return {
+        type: DOWNVOTE,
+        id
+    }
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { upvote, downvote } from '../actions';
 
 class Post extends Component {
     commentString = (commentCount) => {
@@ -36,8 +37,18 @@ class Post extends Component {
                         Vote: {thisPost.voteScore}
                     </div>
                     <div className="col-md-1">
-                        <button className="btn btn-success btn-sm postButton">+</button>
-                        <button className="btn btn-danger btn-sm postButton">-</button>
+                        <button 
+                            className="btn btn-success btn-sm postButton"
+                            onClick={() => {this.props.upvote({id: thisPost.id})}}
+                        >
+                            +
+                        </button>
+                        <button 
+                            className="btn btn-danger btn-sm postButton"
+                            onClick={() => {this.props.downvote({id: thisPost.id})}}
+                        >
+                            -
+                        </button>
                     </div>
                     <div className="col-md-3">
                         <Link 
@@ -65,7 +76,10 @@ class Post extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        upvote: (id) => dispatch(upvote(id)),
+        downvote: (id) => dispatch(downvote(id))
+    };
 }
 
 const mapStateToProps = (state, ownProps) => {
