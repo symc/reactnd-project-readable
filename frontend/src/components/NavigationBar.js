@@ -5,7 +5,6 @@ import { changeSortBy } from '../actions';
 
 class NavigationBar extends Component {
     render() {
-        console.log(this.props.sortBy);
         const selectedSortMethod = `btn btn-info navbar-btn`;
         const unselectedSortMethod = `btn btn-warning navbar-btn`;
         const sortBy = this.props.sortBy;

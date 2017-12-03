@@ -3,8 +3,9 @@ import { combineReducers } from 'redux';
 import {
     ADD_CATEGORY, 
     CHANGE_SORTBY,
-    UPVOTE,
-    DOWNVOTE
+    UPVOTE_POST,
+    DOWNVOTE_POST,
+    DELETE_POST
 } from '../actions';
 
 
@@ -61,22 +62,26 @@ const initialPostsState = {
 
 function posts(state = initialPostsState, action) {
     switch (action.type) {
-        case UPVOTE:
+        case UPVOTE_POST:
             return {
                 ...state,
                 [action.id]: {
                     ...state[action.id],
                     voteScore: state[action.id].voteScore + 1
                 }
-            }
-        case DOWNVOTE:
+            };
+        case DOWNVOTE_POST:
             return {
                 ...state,
                 [action.id]: {
                     ...state[action.id],
                     voteScore: state[action.id].voteScore - 1
                 }
-            }
+            };
+        case DELETE_POST:
+            let newState = Object.assign({}, state);
+            delete newState[action.id];
+            return newState;
         default:
             return state;
     }

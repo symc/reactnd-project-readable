@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { upvote, downvote } from '../actions';
+import { upvotePost, downvotePost, deletePost } from '../actions';
 
 class Post extends Component {
     commentString = (commentCount) => {
@@ -39,13 +39,13 @@ class Post extends Component {
                     <div className="col-md-1">
                         <button 
                             className="btn btn-success btn-sm postButton"
-                            onClick={() => {this.props.upvote({id: thisPost.id})}}
+                            onClick={() => {this.props.upvotePost({id: thisPost.id})}}
                         >
                             +
                         </button>
                         <button 
                             className="btn btn-danger btn-sm postButton"
-                            onClick={() => {this.props.downvote({id: thisPost.id})}}
+                            onClick={() => {this.props.downvotePost({id: thisPost.id})}}
                         >
                             -
                         </button>
@@ -65,6 +65,7 @@ class Post extends Component {
                         </Link>                       
                         <button 
                             className="btn btn-danger btn-sm postButton"
+                            onClick={() => this.props.deletePost({id: thisPost.id})}
                         >
                             DELETE
                         </button>                       
@@ -77,8 +78,9 @@ class Post extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        upvote: (id) => dispatch(upvote(id)),
-        downvote: (id) => dispatch(downvote(id))
+        upvotePost: (id) => dispatch(upvotePost(id)),
+        downvotePost: (id) => dispatch(downvotePost(id)),
+        deletePost: (id) => dispatch(deletePost(id))
     };
 }
 
