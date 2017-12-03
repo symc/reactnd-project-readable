@@ -20,8 +20,8 @@ class App extends Component {
                 <Route exact path = "/" component={PostList} />
                 <Route exact path = "/new/post" component={CreatePost} />               
                 <Route exact path = "/:category" component={PostList} />
-                <Route exact path = "/:category/:idx" component={PostDetails} />
-                <Route path = "/:category/:idx/edit" component={EditPost} />
+                <Route exact path = "/:category/:id" component={PostDetails} />
+                <Route path = "/:category/:id/edit" component={EditPost} />
                 <Route component={NotFound}/>
             </Switch>
         </div>

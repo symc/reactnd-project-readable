@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 class EditPost extends Component {
     render() {
-        const postID = this.props.match.params.idx;
+        const postID = this.props.match.params.id;
         return (
             <div>Edit post form for {postID}</div>
         );

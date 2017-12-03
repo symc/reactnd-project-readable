@@ -29,6 +29,11 @@
     margin-bottom: 2px;
 }
 
+.addCommentButton {
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
 .postAuthor {
     font-weight: bold;
     color: #0c9b24

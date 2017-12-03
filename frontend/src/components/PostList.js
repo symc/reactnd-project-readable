@@ -12,7 +12,7 @@ class PostList extends Component {
                 <div>
                     {postIds.map((id) => (
                         <div key={id}>
-                            <Post id={id}/>
+                            <Post id={id} showDetails={true}/>
                         </div>
                     ))}
                 </div>

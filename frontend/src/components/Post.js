@@ -18,7 +18,7 @@ class Post extends Component {
         const detailsPage = `/${this.props.post.category}/${this.props.post.id}`;
         const editPage = detailsPage + '/edit';
         return (
-            <div className="panel panel-default">
+            <div className="panel panel-info">
                 <div className="panel-heading postHeader">{thisPost.title}</div>
                 <div className="panel-body">
                     <div className="postContent">{thisPost.body}</div>
@@ -51,12 +51,15 @@ class Post extends Component {
                         </button>
                     </div>
                     <div className="col-md-3">
-                        <Link 
-                            className="btn btn-info btn-sm postButton" 
-                            to={detailsPage}
-                        >
-                            DETAILS
-                        </Link>                       
+                        {
+                            this.props.showDetails &&
+                            <Link 
+                                className="btn btn-info btn-sm postButton" 
+                                to={detailsPage}
+                            >
+                                DETAILS
+                            </Link>
+                        }              
                         <Link 
                             className="btn btn-success btn-sm postButton" 
                             to={editPage}
@@ -65,7 +68,10 @@ class Post extends Component {
                         </Link>                       
                         <button 
                             className="btn btn-danger btn-sm postButton"
-                            onClick={() => this.props.deletePost({id: thisPost.id})}
+                            onClick={() => {
+                                    this.props.deletePost({id: thisPost.id});
+                                }
+                            }
                         >
                             DELETE
                         </button>                       

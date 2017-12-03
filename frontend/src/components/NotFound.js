@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 class NotFound extends Component {
     render() {
         return (
-            <div>Sorry, the page you are looking for is not found.</div>
+            // Redirect to main page if the entered URL cannot 
+            // be found
+            <Redirect to="/"/>
         );
     }
 }
