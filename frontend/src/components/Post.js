@@ -13,6 +13,14 @@ class Post extends Component {
             return `${commentCount} comments`;
         }
     };
+    
+    dateString = (timestamp) => {
+        const date = new Date(timestamp);
+        const day = `${date.getMonth()+1}/${date.getDay()+1}/${date.getFullYear()}`;
+        const hour = `${date.getHours()}:${(date.getMinutes() < 10) ? '0' : ''}${date.getMinutes()}`
+        return (`${day} ${hour}`);
+    }
+
     render() {
         const thisPost = this.props.post;
         const detailsPage = `/${this.props.post.category}/${this.props.post.id}`;
@@ -30,13 +38,18 @@ class Post extends Component {
                     <div className="col-md-1 postCategory">
                         #{thisPost.category}
                     </div>
+                    <div className="col-md-3">
+                        <div className="col-md-5">
+                            {this.commentString(thisPost.commentCount)}
+                        </div>
+                        <div className="col-md-5">
+                            {this.dateString(thisPost.timestamp)}
+                        </div>
+                    </div>
                     <div className="col-md-2">
-                        {this.commentString(thisPost.commentCount)}
-                    </div>
-                    <div className="col-md-1">
-                        Vote: {thisPost.voteScore}
-                    </div>
-                    <div className="col-md-1">
+                        <div className="col-md-7">
+                            Vote: {thisPost.voteScore}
+                        </div>
                         <button 
                             className="btn btn-success btn-sm postButton"
                             onClick={() => {

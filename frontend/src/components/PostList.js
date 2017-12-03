@@ -29,21 +29,23 @@ function sortPosts(posts, postIds, sortMethod) {
     let tuples = postIds.map((id) => {
         switch (sortMethod) {
             case 'votes':
-                // Sort by decreasing scores
-                // Higher score posts will appear earlier than lower scores
-                return [-posts[id].voteScore, id];
+                return [posts[id].voteScore, id];
             case 'dates':
-                // Sort by decreasing time stamp
-                // Recent posts will appear earlier than later posts
-                return [-posts[id].timestamp, id]
+                return [posts[id].timestamp, id]
             case 'titles':
-                // Alphabetical sorting of the post titles
                 return [posts[id].title, id];
             default:
                 return [id, id];
         }
     });
-    tuples.sort();
+    switch (sortMethod) {
+        case 'votes':
+        case 'dates':
+            tuples.sort(function(a, b){return b[0]-a[0]});
+            break;
+        default:
+            tuples.sort();
+    }
     return tuples.map((tuple) => {
         return tuple[1];
     });
