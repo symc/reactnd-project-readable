@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { upvoteComment, downvoteComment, deleteComment } from '../actions';
+import { decreasePostCommentCount} from '../actions';
 
 class Comment extends Component {
     render() {
@@ -20,11 +22,19 @@ class Comment extends Component {
                         <div className="col-md-1">
                             <button 
                                 className="btn btn-success btn-sm postButton"
+                                onClick={() => {
+                                        this.props.upvoteComment({id: thisComment.id})
+                                    }
+                                }
                             >
                                 +
                             </button>
                             <button 
                                 className="btn btn-danger btn-sm postButton"
+                                onClick={() => {
+                                        this.props.downvoteComment({id: thisComment.id})
+                                    }
+                                }
                             >
                                 -
                             </button>
@@ -37,6 +47,13 @@ class Comment extends Component {
                             </button>
                             <button 
                                 className="btn btn-danger btn-sm postButton"
+                                onClick={() => {
+                                        this.props.deleteComment({id: thisComment.id});
+                                        this.props.decreasePostCommentCount(
+                                            {id: thisComment.parentId}
+                                        );
+                                    }
+                                }
                             >
                                 DELETE
                             </button>
@@ -49,7 +66,12 @@ class Comment extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        upvoteComment: (id) => dispatch(upvoteComment(id)),
+        downvoteComment: (id) => dispatch(downvoteComment(id)),
+        deleteComment: (id) => dispatch(deleteComment(id)),
+        decreasePostCommentCount: (id) => dispatch(decreasePostCommentCount(id))
+    };
 }
 
 const mapStateToProps = (state, ownProps) => {

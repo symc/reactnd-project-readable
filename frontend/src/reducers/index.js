@@ -1,11 +1,15 @@
 import { combineReducers } from 'redux';
 
 import {
-    ADD_CATEGORY, 
     CHANGE_SORTBY,
     UPVOTE_POST,
     DOWNVOTE_POST,
-    DELETE_POST
+    DELETE_POST,
+    INCREASE_POST_COMMENT_COUNT,
+    DECREASE_POST_COMMENT_COUNT,
+    UPVOTE_COMMENT,
+    DOWNVOTE_COMMENT,
+    DELETE_COMMENT
 } from '../actions';
 
 
@@ -26,10 +30,6 @@ const initialCategoriesState = {
 
 function categories(state = initialCategoriesState, action) {
     switch (action.type) {
-        case ADD_CATEGORY:
-            const {name} = action;
-            state.push({name: name, path:name});
-            return state;
         default:
             return state;
     }
@@ -82,6 +82,22 @@ function posts(state = initialPostsState, action) {
             let newState = Object.assign({}, state);
             delete newState[action.id];
             return newState;
+        case INCREASE_POST_COMMENT_COUNT:
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id],
+                    commentCount: state[action.id].commentCount + 1
+                }
+            }
+        case DECREASE_POST_COMMENT_COUNT:
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id],
+                    commentCount: state[action.id].commentCount - 1
+                }
+            }
         default:
             return state;
     }
@@ -112,6 +128,26 @@ const initialCommentsState = {
 
 function comments(state = initialCommentsState, action) {
     switch (action.type) {
+        case UPVOTE_COMMENT:
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id],
+                    voteScore: state[action.id].voteScore + 1
+                }
+        };
+        case DOWNVOTE_COMMENT:
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id],
+                    voteScore: state[action.id].voteScore - 1
+                }
+            };
+        case DELETE_COMMENT:
+            let newState = Object.assign({}, state);
+            delete newState[action.id];
+            return newState;
         default:
             return state;
     }

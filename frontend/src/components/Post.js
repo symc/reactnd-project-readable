@@ -39,13 +39,19 @@ class Post extends Component {
                     <div className="col-md-1">
                         <button 
                             className="btn btn-success btn-sm postButton"
-                            onClick={() => {this.props.upvotePost({id: thisPost.id})}}
+                            onClick={() => {
+                                    this.props.upvotePost({id: thisPost.id})
+                                }
+                            }
                         >
                             +
                         </button>
                         <button 
                             className="btn btn-danger btn-sm postButton"
-                            onClick={() => {this.props.downvotePost({id: thisPost.id})}}
+                            onClick={() => {
+                                    this.props.downvotePost({id: thisPost.id})
+                                }
+                            }
                         >
                             -
                         </button>
