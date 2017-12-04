@@ -17,7 +17,7 @@ class CommentList extends Component {
                     <button
                         className="btn btn-primary addCommentButton" 
                     >
-                        Add a new comment
+                        Add new comment
                     </button>
                 </div>
             </div>

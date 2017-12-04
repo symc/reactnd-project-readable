@@ -14,7 +14,7 @@ class NavigationBar extends Component {
                     <div className="navbar-header">
                         <Link to="/" className="navbar-brand">Readable</Link>
                     </div>
-                    <Link to="/new/post" className="btn btn-success navbar-btn">Add new post</Link>
+                    <Link to="/newpost" className="btn btn-success navbar-btn">Add new post</Link>
                     <button 
                         className={(sortBy === 'votes') ? 
                             selectedSortMethod : unselectedSortMethod}

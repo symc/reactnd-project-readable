@@ -18,7 +18,7 @@ class App extends Component {
             <NavigationBar/>
             <Switch>
                 <Route exact path = "/" component={PostList} />
-                <Route exact path = "/new/post" component={CreatePost} />               
+                <Route exact path = "/newpost" component={CreatePost} />               
                 <Route exact path = "/:category" component={PostList} />
                 <Route exact path = "/:category/:id" component={PostDetails} />
                 <Route path = "/:category/:id/edit" component={EditPost} />
