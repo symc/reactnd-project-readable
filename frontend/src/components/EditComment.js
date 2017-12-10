@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addComment, increasePostCommentCount } from '../actions';
+import { addComment } from '../actions';
 import { withRouter } from 'react-router';
 import NotFound from './NotFound';
 
@@ -78,8 +78,7 @@ class EditComment extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addComment: (post) => dispatch(addComment(post)),
-        increasePostCommentCount: (id) => dispatch(increasePostCommentCount(id))
+        addComment: (post) => dispatch(addComment(post))
     };
 }
 

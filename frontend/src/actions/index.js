@@ -9,11 +9,28 @@ export const DECREASE_POST_COMMENT_COUNT = 'DECREASE_POST_COMMENT_COUNT';
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const INITIALIZE_POSTS = 'INITIALIZE_POSTS';
+export const INITIALIZE_CATEGORIES = 'INITIALIZE_CATEGORIES';
+export const UPDATE_COMMENTS = 'UPDATE_COMMENTS';
 
 export function changeSortBy({sortBy}) {
     return {
         type: CHANGE_SORTBY,
         sortBy
+    }
+};
+
+export function initializeCategories(initialState) {
+    return {
+        type: INITIALIZE_CATEGORIES,
+        initialState
+    }
+};
+
+export function initializePosts(initialState) {
+    return {
+        type: INITIALIZE_POSTS,
+        initialState
     }
 };
 
@@ -86,5 +103,12 @@ export function addComment(comment, createId) {
         type: ADD_COMMENT,
         comment,
         createId
+    }
+}
+
+export function updateComments(comments) {
+    return {
+        type: UPDATE_COMMENTS,
+        comments
     }
 }

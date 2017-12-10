@@ -12,12 +12,33 @@ import EditPost from './EditPost';
 import EditComment from './EditComment';
 import '../styles/App.css';
 import axiosHelpers from '../utils/axiosHelpers';
+import { initializePosts, initializeCategories } from '../actions';
 
 class App extends Component {
     componentDidMount() {
+        // Initialize categories in redux store
         axiosHelpers.getCategories().then((response) => {
-            console.log(response.data);
-            console.log(response.status);
+            let categories = {};
+            response.data['categories'].forEach((element) => {
+                categories = {
+                    ...categories,
+                    [element.name]: element
+                };
+            });
+            this.props.initializeCategories(categories);
+        }).catch((error) => {
+            console.log(error);
+        });
+        // Initialize posts in redux store
+        axiosHelpers.getPosts().then((response) => {
+            let posts = {};
+            response.data.forEach((element) => {
+                posts = {
+                    ...posts,
+                    [element.id]: element
+                };
+            });
+            this.props.initializePosts(posts);
         }).catch((error) => {
             console.log(error);
         });
@@ -43,7 +64,10 @@ class App extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        initializePosts: (posts) => dispatch(initializePosts(posts)),
+        initializeCategories: (categories) => dispatch(initializeCategories(categories))
+    };
 }
 
 function mapStateToProps({categories, posts, comments}) {
