@@ -38,10 +38,11 @@ export function deletePost({id}) {
     }
 };
 
-export function addPost(post) {
+export function addPost(post, createId) {
     return {
         type: ADD_POST,
-        post
+        post,
+        createId
     }
 };
 

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import CreatePost from './CreatePost';
 
 class EditPost extends Component {
     render() {
-        const postID = this.props.match.params.id;
+        const postId = this.props.match.params.id;
         return (
-            <div>Edit post form for {postID}</div>
+            <CreatePost editedPostId={postId}/>
         );
     }
 }

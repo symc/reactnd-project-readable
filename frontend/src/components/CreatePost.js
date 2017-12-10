@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addPost } from '../actions';
+import { withRouter } from 'react-router';
 
 class CreatePost extends Component {
-    savePost = () => {
+    savePost = (prepopulateWith) => {
         let title = document.getElementById('title').value;
         const postBody = document.getElementById('postBody').value;
         let author = document.getElementById('author').value;
@@ -18,30 +19,65 @@ class CreatePost extends Component {
             title = '[No title]';
         }
         const timestamp = Date.now();
-        const post = {
-            id: timestamp,
-            timestamp: timestamp,
-            title: title,
-            body: postBody,
-            author: author,
-            category: category,
-            voteScore: 0,
-            deleted: false,
-            commentCount: 0
-        };
-        this.props.addPost(post);
+        if (prepopulateWith) {
+            prepopulateWith.title = title;
+            prepopulateWith.body = postBody;
+            prepopulateWith.author = author;
+            prepopulateWith.category = category;
+            prepopulateWith.timestamp = timestamp
+            this.props.addPost(prepopulateWith, false)
+        } else {
+            const newPost = {
+                id: timestamp,
+                timestamp: timestamp,
+                title: title,
+                body: postBody,
+                author: author,
+                category: category,
+                voteScore: 0,
+                deleted: false,
+                commentCount: 0
+            };
+            this.props.addPost(newPost, true);
+        }
     };
 
     render() {
         const categoryIds = this.props.categoryIds;
+        const prepopulateWith = this.props.prepopulateWith;
+        const panelTitle = (prepopulateWith) ?
+            "Editing the post" :
+            "Add a new post";
+        const category = this.props.match.params.category;
+        const id = this.props.match.params.id;
+        const discardPath = (prepopulateWith) ?
+            `/${category}/${id}` :
+            "/";
+        const initialTitle = (prepopulateWith) ? 
+            prepopulateWith.title :
+            "";
+        const initialBody = (prepopulateWith) ? 
+            prepopulateWith.body :
+            "";
+        const initialAuthor = (prepopulateWith) ? 
+            prepopulateWith.author :
+            "";
+        const initialCategory = (prepopulateWith) ? 
+            prepopulateWith.category :
+            "";
         return (
             <div>
                 <div className="panel panel-success">
-                    <div className="panel-heading postHeader">Add a new post</div>
+                    <div className="panel-heading postHeader">{panelTitle}</div>
                     <div className="panel-body">
                         <div className="form-group">
                             <label>Post title</label>
-                            <input type="text" className="form-control" id="title"/>
+                            <input 
+                                type="text"
+                                className="form-control"
+                                id="title"
+                                defaultValue={initialTitle}
+                            />
                         </div>
                         <div className="form-group">
                             <label>Post body</label>
@@ -49,15 +85,25 @@ class CreatePost extends Component {
                                 className="form-control" 
                                 rows="5"
                                 id="postBody"
+                                defaultValue={initialBody}
                             />
                         </div>
                         <div className="form-group">
                             <label>Post author</label>
-                            <input type="text" className="form-control" id="author"/>
+                            <input 
+                                type="text"
+                                className="form-control"
+                                id="author"
+                                defaultValue={initialAuthor}
+                            />
                         </div>
                         <div className="form-group">
                             <label>Category</label>
-                            <select id="category" className="form-control">
+                            <select 
+                                id="category"
+                                className="form-control"
+                                defaultValue={initialCategory}
+                            >
                                 {categoryIds.map((id) => (
                                     <option key={id}>{id}</option>
                                 ))}
@@ -67,13 +113,13 @@ class CreatePost extends Component {
                             <Link
                                 className="btn btn-primary"
                                 to='/'
-                                onClick={() => this.savePost()}
+                                onClick={() => this.savePost(prepopulateWith)}
                             >
                                 Save
                             </Link>
                             <Link 
                                 className="btn btn-danger"
-                                to='/'
+                                to={discardPath}
                             >
                                 Discard
                             </Link>
@@ -87,17 +133,20 @@ class CreatePost extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addPost: (post) => dispatch(addPost(post))
+        addPost: (post, createId) => 
+            dispatch(addPost(post, createId))
     };
 }
 
-function mapStateToProps({categories, posts, comments}) {
+const mapStateToProps = (state, ownProps) => {
+    const postId = ownProps.editedPostId;
     return {
-        categoryIds: Object.keys(categories)
+        prepopulateWith: state.posts[postId],
+        categoryIds: Object.keys(state.categories)
     };
 }
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(CreatePost);
+)(CreatePost));

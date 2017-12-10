@@ -86,9 +86,12 @@ function posts(state = initialPostsState, action) {
             return newState;
         case ADD_POST:
             let post = action.post;
-            const CryptoJS = require('crypto-js');
-            const salt = CryptoJS.MD5(post.author).toString();
-            post.id = CryptoJS.MD5(salt + post.timestamp + salt).toString();
+            let createId = action.createId;
+            if (createId) {
+                const CryptoJS = require('crypto-js');
+                const salt = CryptoJS.MD5(post.author).toString();
+                post.id = CryptoJS.MD5(salt + post.timestamp + salt).toString();
+            }
             return {
                 ...state,
                 [post.id]: post
