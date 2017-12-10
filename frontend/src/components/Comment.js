@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { upvoteComment, downvoteComment, deleteComment } from '../actions';
 import { decreasePostCommentCount} from '../actions';
+import { Link } from 'react-router-dom';
 
 class Comment extends Component {
     dateString = (timestamp) => {
@@ -50,11 +51,12 @@ class Comment extends Component {
                             </button>
                         </div>
                         <div className="col-md-3">
-                            <button
-                                className="btn btn-success btn-sm postButton" 
+                            <Link
+                                className="btn btn-success btn-sm postButton"
+                                to={`/editcomment/${thisComment.id}`}
                             >
                                 EDIT
-                            </button>
+                            </Link>
                             <button 
                                 className="btn btn-danger btn-sm postButton"
                                 onClick={() => {

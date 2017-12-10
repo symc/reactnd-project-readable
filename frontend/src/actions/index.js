@@ -81,9 +81,10 @@ export function deleteComment({id}) {
     }
 };
 
-export function addComment(comment) {
+export function addComment(comment, createId) {
     return {
         type: ADD_COMMENT,
-        comment
+        comment,
+        createId
     }
 }

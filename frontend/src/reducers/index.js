@@ -164,9 +164,12 @@ function comments(state = initialCommentsState, action) {
             return newState;
         case ADD_COMMENT:
             let comment = action.comment;
-            const CryptoJS = require('crypto-js');
-            const salt = CryptoJS.MD5(comment.author).toString();
-            comment.id = CryptoJS.MD5(salt + comment.timestamp + salt).toString();
+            let createId = action.createId;
+            if (createId) {
+                const CryptoJS = require('crypto-js');
+                const salt = CryptoJS.MD5(comment.author).toString();
+                comment.id = CryptoJS.MD5(salt + comment.timestamp + salt).toString();
+            }
             return {
                 ...state,
                 [comment.id]: comment
