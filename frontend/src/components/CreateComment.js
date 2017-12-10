@@ -36,6 +36,7 @@ class CreateComment extends Component {
                 <NotFound/>
             )
         }
+        
         const category = this.props.match.params.category;
         const id = this.props.match.params.id;
         const postDetailsPath = `/${category}/${id}`;

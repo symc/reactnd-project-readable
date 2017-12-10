@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addPost } from '../actions';
 import { withRouter } from 'react-router';
+import NotFound from './NotFound';
 
 class CreatePost extends Component {
     savePost = (thisPost) => {
@@ -28,8 +29,14 @@ class CreatePost extends Component {
     };
 
     render() {
-        const categoryIds = this.props.categoryIds;
         const thisPost = this.props.post;
+        if (!thisPost) {
+            return (
+                <NotFound/>
+            )
+        }
+
+        const categoryIds = this.props.categoryIds;
         const panelTitle = "Editing the post";
         const category = this.props.match.params.category;
         const id = this.props.match.params.id;
