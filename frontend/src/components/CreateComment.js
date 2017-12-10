@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addComment, increasePostCommentCount } from '../actions';
 import { withRouter } from 'react-router';
+import NotFound from './NotFound';
 
 class CreateComment extends Component {
     saveComment = () => {
@@ -29,6 +30,12 @@ class CreateComment extends Component {
     };
 
     render() {
+        const thisPost = this.props.post;
+        if (!thisPost) {
+            return (
+                <NotFound/>
+            )
+        }
         const category = this.props.match.params.category;
         const id = this.props.match.params.id;
         const postDetailsPath = `/${category}/${id}`;
@@ -74,9 +81,12 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-function mapStateToProps({categories, posts, comments}) {
-    return {};
-}
+const mapStateToProps = (state, ownProps) => {
+    const postId = ownProps.match.params.id;
+    return {
+        post: state.posts[postId]
+    };
+};
 
 export default withRouter(connect(
     mapStateToProps,
