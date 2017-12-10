@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Category from './Category';
+import { Link } from 'react-router-dom';
 
 class CategoriesBar extends Component {
     render() {
@@ -8,6 +9,9 @@ class CategoriesBar extends Component {
         return (
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
+                    <Link to='/' className="btn btn-primary btn-sml navbar-btn">
+                        Show all categories
+                    </Link>
                     {categoryIds.map((id) => (
                         <Category key={id} id={id}/>
                     ))}
