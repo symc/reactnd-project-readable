@@ -11,26 +11,35 @@ import NotFound from './NotFound';
 import EditPost from './EditPost';
 import EditComment from './EditComment';
 import '../styles/App.css';
+import axiosHelpers from '../utils/axiosHelpers';
 
 class App extends Component {
-  render() {
-    return (
-        <div className="App">
-            {/*Show the navigation bars in all views*/}
-            <NavigationBar/>
-            <Switch>
-                <Route exact path = "/" component={PostList} />
-                <Route exact path = "/newpost" component={CreatePost} />
-                <Route exact path = "/editcomment/:commentid" component={EditComment} />
-                <Route exact path = "/:category" component={PostList} />
-                <Route exact path = "/:category/:id" component={PostDetails} />
-                <Route exact path = "/:category/:id/newcomment" component={CreateComment} />
-                <Route path = "/:category/:id/edit" component={EditPost} />
-                <Route component={NotFound}/>
-            </Switch>
-        </div>
-    );
-  }
+    componentDidMount() {
+        axiosHelpers.getCategories().then((response) => {
+            console.log(response.data);
+            console.log(response.status);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+    render() {
+        return (
+            <div className="App">
+                {/*Show the navigation bars in all views*/}
+                <NavigationBar/>
+                <Switch>
+                    <Route exact path = "/" component={PostList} />
+                    <Route exact path = "/newpost" component={CreatePost} />
+                    <Route exact path = "/editcomment/:commentid" component={EditComment} />
+                    <Route exact path = "/:category" component={PostList} />
+                    <Route exact path = "/:category/:id" component={PostDetails} />
+                    <Route exact path = "/:category/:id/newcomment" component={CreateComment} />
+                    <Route path = "/:category/:id/edit" component={EditPost} />
+                    <Route component={NotFound}/>
+                </Switch>
+            </div>
+        );
+    }
 }
 
 function mapDispatchToProps(dispatch) {
