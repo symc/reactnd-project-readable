@@ -5,6 +5,7 @@ import {
     UPVOTE_POST,
     DOWNVOTE_POST,
     DELETE_POST,
+    ADD_POST,
     INCREASE_POST_COMMENT_COUNT,
     DECREASE_POST_COMMENT_COUNT,
     UPVOTE_COMMENT,
@@ -82,6 +83,15 @@ function posts(state = initialPostsState, action) {
             let newState = Object.assign({}, state);
             delete newState[action.id];
             return newState;
+        case ADD_POST:
+            let post = action.post;
+            const CryptoJS = require('crypto-js');
+            const salt = CryptoJS.MD5(post.author).toString();
+            post.id = CryptoJS.MD5(salt + post.timestamp + salt).toString();
+            return {
+                ...state,
+                [post.id]: post
+            };
         case INCREASE_POST_COMMENT_COUNT:
             return {
                 ...state,

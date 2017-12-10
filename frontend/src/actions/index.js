@@ -3,6 +3,7 @@ export const CHANGE_SORTBY = 'CHANGE_SORTBY';
 export const UPVOTE_POST = 'UPVOTE_POST';
 export const DOWNVOTE_POST = 'DOWNVOTE_POST';
 export const DELETE_POST = 'DELETE_POST';
+export const ADD_POST = 'ADD_POST';
 export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
 export const INCREASE_POST_COMMENT_COUNT = 'INCREASE_POST_COMMENT_COUNT';
 export const DECREASE_POST_COMMENT_COUNT = 'DECREASE_POST_COMMENT_COUNT';
@@ -41,6 +42,13 @@ export function deletePost({id}) {
     return {
         type: DELETE_POST,
         id
+    }
+};
+
+export function addPost(post) {
+    return {
+        type: ADD_POST,
+        post
     }
 };
 
