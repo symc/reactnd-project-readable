@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 class Comment extends Component {
     dateString = (timestamp) => {
         const date = new Date(timestamp);
-        const day = `${date.getMonth()+1}/${date.getDay()+1}/${date.getFullYear()}`;
+        const day = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
         const hour = `${date.getHours()}:${(date.getMinutes() < 10) ? '0' : ''}${date.getMinutes()}`
         return (`${day} ${hour}`);
     }

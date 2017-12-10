@@ -5,7 +5,7 @@ import { addPost } from '../actions';
 import { withRouter } from 'react-router';
 
 class CreatePost extends Component {
-    savePost = (prepopulateWith) => {
+    savePost = () => {
         let title = document.getElementById('title').value;
         const postBody = document.getElementById('postBody').value;
         let author = document.getElementById('author').value;
@@ -19,52 +19,29 @@ class CreatePost extends Component {
             title = '[No title]';
         }
         const timestamp = Date.now();
-        if (prepopulateWith) {
-            prepopulateWith.title = title;
-            prepopulateWith.body = postBody;
-            prepopulateWith.author = author;
-            prepopulateWith.category = category;
-            prepopulateWith.timestamp = timestamp
-            this.props.addPost(prepopulateWith, false)
-        } else {
-            const newPost = {
-                id: timestamp,
-                timestamp: timestamp,
-                title: title,
-                body: postBody,
-                author: author,
-                category: category,
-                voteScore: 0,
-                deleted: false,
-                commentCount: 0
-            };
-            this.props.addPost(newPost, true);
-        }
+        const newPost = {
+            id: timestamp,
+            timestamp: timestamp,
+            title: title,
+            body: postBody,
+            author: author,
+            category: category,
+            voteScore: 0,
+            deleted: false,
+            commentCount: 0
+        };
+        this.props.addPost(newPost, true);
     };
 
     render() {
         const categoryIds = this.props.categoryIds;
-        const prepopulateWith = this.props.prepopulateWith;
-        const panelTitle = (prepopulateWith) ?
-            "Editing the post" :
-            "Add a new post";
-        const category = this.props.match.params.category;
-        const id = this.props.match.params.id;
-        const discardPath = (prepopulateWith) ?
-            `/${category}/${id}` :
-            "/";
-        const initialTitle = (prepopulateWith) ? 
-            prepopulateWith.title :
-            "";
-        const initialBody = (prepopulateWith) ? 
-            prepopulateWith.body :
-            "";
-        const initialAuthor = (prepopulateWith) ? 
-            prepopulateWith.author :
-            "";
-        const initialCategory = (prepopulateWith) ? 
-            prepopulateWith.category :
-            "";
+        const panelTitle = "Add a new post";
+        const discardPath = "/";
+        const initialTitle = "";
+        const initialBody = "";
+        const initialAuthor = "";
+        const initialCategory = "";
+        const onClickFunction = () => this.savePost();
         return (
             <div>
                 <div className="panel panel-success">
@@ -113,7 +90,7 @@ class CreatePost extends Component {
                             <Link
                                 className="btn btn-primary"
                                 to='/'
-                                onClick={() => this.savePost(prepopulateWith)}
+                                onClick={onClickFunction}
                             >
                                 Save
                             </Link>
@@ -139,9 +116,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const postId = ownProps.editedPostId;
     return {
-        prepopulateWith: state.posts[postId],
         categoryIds: Object.keys(state.categories)
     };
 }
