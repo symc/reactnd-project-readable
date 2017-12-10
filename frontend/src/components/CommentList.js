@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Comment from './Comment';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 class CommentList extends Component {
     render() {
         const commentIds = this.props.commentList;
+        const currentPath = this.props.location.pathname;
+        const newCommentPath = currentPath + '/newcomment'
         return (
             <div>
                 <div className="panel panel-warning">
@@ -14,11 +18,12 @@ class CommentList extends Component {
                             <Comment key={id} id={id}/>
                         ))}
                     </div>
-                    <button
+                    <Link
                         className="btn btn-primary addCommentButton" 
+                        to={newCommentPath}
                     >
                         Add new comment
-                    </button>
+                    </Link>
                 </div>
             </div>
         );
@@ -41,7 +46,7 @@ const mapStateToProps = (state, ownProps) => {
     };
 }
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(CommentList);
+)(CommentList));

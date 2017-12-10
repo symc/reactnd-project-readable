@@ -10,7 +10,8 @@ import {
     DECREASE_POST_COMMENT_COUNT,
     UPVOTE_COMMENT,
     DOWNVOTE_COMMENT,
-    DELETE_COMMENT
+    DELETE_COMMENT,
+    ADD_COMMENT
 } from '../actions';
 
 
@@ -158,6 +159,15 @@ function comments(state = initialCommentsState, action) {
             let newState = Object.assign({}, state);
             delete newState[action.id];
             return newState;
+        case ADD_COMMENT:
+            let comment = action.comment;
+            const CryptoJS = require('crypto-js');
+            const salt = CryptoJS.MD5(comment.author).toString();
+            comment.id = CryptoJS.MD5(salt + comment.timestamp + salt).toString();
+            return {
+                ...state,
+                [comment.id]: comment
+            }
         default:
             return state;
     }

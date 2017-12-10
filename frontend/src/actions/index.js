@@ -1,4 +1,3 @@
-export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const CHANGE_SORTBY = 'CHANGE_SORTBY';
 export const UPVOTE_POST = 'UPVOTE_POST';
 export const DOWNVOTE_POST = 'DOWNVOTE_POST';
@@ -9,13 +8,7 @@ export const INCREASE_POST_COMMENT_COUNT = 'INCREASE_POST_COMMENT_COUNT';
 export const DECREASE_POST_COMMENT_COUNT = 'DECREASE_POST_COMMENT_COUNT';
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
-
-export function addCategory({name}){
-    return {
-        type: ADD_CATEGORY,
-        name
-    }
-};
+export const ADD_COMMENT = 'ADD_COMMENT';
 
 export function changeSortBy({sortBy}) {
     return {
@@ -86,3 +79,10 @@ export function deleteComment({id}) {
         id
     }
 };
+
+export function addComment(comment) {
+    return {
+        type: ADD_COMMENT,
+        comment
+    }
+}
