@@ -8,7 +8,8 @@ import NotFound from './NotFound';
 class PostDetails extends Component {
     render() {
         const thisPost = this.props.post;
-        if (!thisPost) {
+        const category = this.props.match.params.category;
+        if (!thisPost || thisPost.category !== category) {
             return (
                 <NotFound/>
             )
@@ -28,7 +29,9 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state, ownProps) => {
     const postId = ownProps.match.params.id;
+    const category = ownProps.match.params.category;
     return {
+        category: category,
         post: state.posts[postId]
     };
 };

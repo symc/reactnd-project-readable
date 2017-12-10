@@ -31,13 +31,13 @@ class CreateComment extends Component {
 
     render() {
         const thisPost = this.props.post;
-        if (!thisPost) {
+        const category = this.props.match.params.category;
+        if (!thisPost || thisPost.category !== category) {
             return (
                 <NotFound/>
             )
         }
         
-        const category = this.props.match.params.category;
         const id = this.props.match.params.id;
         const postDetailsPath = `/${category}/${id}`;
         return (

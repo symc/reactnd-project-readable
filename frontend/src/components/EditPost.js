@@ -30,7 +30,8 @@ class CreatePost extends Component {
 
     render() {
         const thisPost = this.props.post;
-        if (!thisPost) {
+        const category = this.props.match.params.category;
+        if (!thisPost || thisPost.category !== category) {
             return (
                 <NotFound/>
             )
@@ -38,7 +39,6 @@ class CreatePost extends Component {
 
         const categoryIds = this.props.categoryIds;
         const panelTitle = "Editing the post";
-        const category = this.props.match.params.category;
         const id = this.props.match.params.id;
         const discardPath = `/${category}/${id}`;
         const initialTitle = thisPost.title;
