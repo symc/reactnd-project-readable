@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addPost } from '../actions';
 import { withRouter } from 'react-router';
+import axiosHelpers from '../utils/axiosHelpers';
 
 class CreatePost extends Component {
     savePost = () => {
@@ -19,8 +20,12 @@ class CreatePost extends Component {
             title = '[No title]';
         }
         const timestamp = Date.now();
+        // Create a new id for the post
+        const CryptoJS = require('crypto-js');
+        const salt = CryptoJS.MD5(author).toString();
+        const id = CryptoJS.MD5(salt + timestamp + salt).toString();
         const newPost = {
-            id: timestamp,
+            id: id,
             timestamp: timestamp,
             title: title,
             body: postBody,
@@ -30,7 +35,11 @@ class CreatePost extends Component {
             deleted: false,
             commentCount: 0
         };
-        this.props.addPost(newPost, true);
+        axiosHelpers.addPost(newPost).then((response) => {
+            this.props.addPost(newPost)
+        }).catch((error) => {
+            console.log(error);
+        });
     };
 
     render() {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
 class NotFound extends Component {
@@ -12,15 +11,4 @@ class NotFound extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {};
-}
-
-function mapStateToProps({categories, posts, comments}) {
-    return {};
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(NotFound);
+export default NotFound;

@@ -55,11 +55,10 @@ export function deletePost({id}) {
     }
 };
 
-export function addPost(post, createId) {
+export function addPost(post) {
     return {
         type: ADD_POST,
-        post,
-        createId
+        post
     }
 };
 

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { addPost } from '../actions';
 import { withRouter } from 'react-router';
 import NotFound from './NotFound';
+import axiosHelpers from '../utils/axiosHelpers';
 
 class CreatePost extends Component {
     savePost = (thisPost) => {
@@ -25,7 +26,11 @@ class CreatePost extends Component {
         thisPost.author = author;
         thisPost.category = category;
         thisPost.timestamp = timestamp
-        this.props.addPost(thisPost, false)
+        axiosHelpers.addPost(thisPost).then((response) => {
+            this.props.addPost(thisPost)
+        }).catch((error) => {
+            console.log(error);
+        });
     };
 
     render() {

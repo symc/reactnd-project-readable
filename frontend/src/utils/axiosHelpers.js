@@ -24,6 +24,9 @@ const axiosHelpers = {
     },
     deletePost: (id) => {
         return axios.delete(baseURL + `/posts/${id}`, config);
+    },
+    addPost: (post) => {
+        return axios.post(baseURL + '/posts', post, config);
     }
 };
 

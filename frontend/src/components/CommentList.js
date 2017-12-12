@@ -30,10 +30,6 @@ class CommentList extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {};
-}
-
 const mapStateToProps = (state, ownProps) => {
     const postId = ownProps.id;
     return {
@@ -48,5 +44,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default withRouter(connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(CommentList));

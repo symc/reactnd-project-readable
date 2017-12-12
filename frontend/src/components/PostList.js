@@ -21,10 +21,6 @@ class PostList extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {};
-}
-
 function sortPosts(posts, postIds, sortMethod) {
     let tuples = postIds.map((id) => {
         switch (sortMethod) {
@@ -72,5 +68,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(PostList);

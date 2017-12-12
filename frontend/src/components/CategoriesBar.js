@@ -21,10 +21,6 @@ class CategoriesBar extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {};
-}
-
 function mapStateToProps({categories, posts, comments}) {
     return {
         categoryIds: Object.keys(categories)
@@ -33,5 +29,5 @@ function mapStateToProps({categories, posts, comments}) {
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(CategoriesBar);

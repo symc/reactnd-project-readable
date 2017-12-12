@@ -14,10 +14,6 @@ class Category extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {};
-}
-
 const mapStateToProps = (state, ownProps) => {
     const categoryId = ownProps.id;
     return {
@@ -27,5 +23,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(Category);
