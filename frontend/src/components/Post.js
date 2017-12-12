@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { upvotePost, downvotePost, deletePost } from '../actions';
+import axiosHelpers from '../utils/axiosHelpers';
 
 class Post extends Component {
     commentString = (commentCount) => {
@@ -53,7 +54,12 @@ class Post extends Component {
                         <button 
                             className="btn btn-success btn-sm postButton"
                             onClick={() => {
-                                    this.props.upvotePost({id: thisPost.id})
+                                    axiosHelpers.upvotePost(thisPost.id)
+                                    .then((response) => {
+                                        this.props.upvotePost({id: thisPost.id})
+                                    }).catch((error) => {
+                                        console.log(error);
+                                    });
                                 }
                             }
                         >
@@ -62,7 +68,12 @@ class Post extends Component {
                         <button 
                             className="btn btn-danger btn-sm postButton"
                             onClick={() => {
-                                    this.props.downvotePost({id: thisPost.id})
+                                    axiosHelpers.downvotePost(thisPost.id)
+                                    .then((response) => {
+                                        this.props.downvotePost({id: thisPost.id})
+                                    }).catch((error) => {
+                                        console.log(error);
+                                    });
                                 }
                             }
                         >
@@ -88,7 +99,12 @@ class Post extends Component {
                         <button 
                             className="btn btn-danger btn-sm postButton"
                             onClick={() => {
-                                    this.props.deletePost({id: thisPost.id});
+                                    axiosHelpers.deletePost(thisPost.id)
+                                    .then((response) => {
+                                        this.props.deletePost({id: thisPost.id})
+                                    }).catch((error) => {
+                                        console.log(error);
+                                    });
                                 }
                             }
                         >

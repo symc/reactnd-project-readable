@@ -15,6 +15,15 @@ const axiosHelpers = {
     },
     getComments: (id) => {
         return axios.get(baseURL + `/posts/${id}/comments`, config);
+    },
+    upvotePost: (id) => {
+        return axios.post(baseURL + `/posts/${id}`, {option: 'upVote'}, config);
+    },
+    downvotePost: (id) => {
+        return axios.post(baseURL + `/posts/${id}`, {'option': 'downVote'}, config);
+    },
+    deletePost: (id) => {
+        return axios.delete(baseURL + `/posts/${id}`, config);
     }
 };
 
