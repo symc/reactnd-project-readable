@@ -20,13 +20,28 @@ const axiosHelpers = {
         return axios.post(baseURL + `/posts/${id}`, {option: 'upVote'}, config);
     },
     downvotePost: (id) => {
-        return axios.post(baseURL + `/posts/${id}`, {'option': 'downVote'}, config);
+        return axios.post(baseURL + `/posts/${id}`, {option: 'downVote'}, config);
     },
     deletePost: (id) => {
         return axios.delete(baseURL + `/posts/${id}`, config);
     },
     addPost: (post) => {
         return axios.post(baseURL + '/posts', post, config);
+    },
+    addComment: (comment) => {
+        return axios.post(baseURL + '/comments', comment, config);
+    },
+    editComment: (comment, id) => {
+        return axios.put(baseURL + `/comments/${id}`, comment, config);
+    },
+    upvoteComment: (id) => {
+        return axios.post(baseURL + `/comments/${id}`, {option: 'upVote'}, config);
+    },
+    downvoteComment: (id) => {
+        return axios.post(baseURL + `/comments/${id}`, {option: 'downVote'}, config);
+    },
+    deleteComment: (id) => {
+        return axios.delete(baseURL + `/comments/${id}`, config);
     }
 };
 

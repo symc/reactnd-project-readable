@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { upvoteComment, downvoteComment, deleteComment } from '../actions';
 import { decreasePostCommentCount} from '../actions';
 import { Link } from 'react-router-dom';
+import axiosHelpers from '../utils/axiosHelpers';
 
 class Comment extends Component {
     dateString = (timestamp) => {
@@ -34,7 +35,12 @@ class Comment extends Component {
                             <button 
                                 className="btn btn-success btn-sm postButton"
                                 onClick={() => {
-                                        this.props.upvoteComment({id: thisComment.id})
+                                    axiosHelpers.upvoteComment(thisComment.id)
+                                        .then((response) => {
+                                            this.props.upvoteComment({id: thisComment.id})
+                                        }).catch((error) => {
+                                            console.log(error);
+                                        });
                                     }
                                 }
                             >
@@ -43,7 +49,12 @@ class Comment extends Component {
                             <button 
                                 className="btn btn-danger btn-sm postButton"
                                 onClick={() => {
-                                        this.props.downvoteComment({id: thisComment.id})
+                                        axiosHelpers.downvoteComment(thisComment.id)
+                                        .then((response) => {
+                                            this.props.downvoteComment({id: thisComment.id})
+                                        }).catch((error) => {
+                                            console.log(error);
+                                        });
                                     }
                                 }
                             >
@@ -60,10 +71,15 @@ class Comment extends Component {
                             <button 
                                 className="btn btn-danger btn-sm postButton"
                                 onClick={() => {
-                                        this.props.deleteComment({id: thisComment.id});
-                                        this.props.decreasePostCommentCount(
-                                            {id: thisComment.parentId}
-                                        );
+                                    axiosHelpers.deleteComment(thisComment.id)
+                                        .then((response) => {
+                                            this.props.deleteComment({id: thisComment.id});
+                                            this.props.decreasePostCommentCount(
+                                                {id: thisComment.parentId}
+                                            );
+                                        }).catch((error) => {
+                                            console.log(error);
+                                        });
                                     }
                                 }
                             >

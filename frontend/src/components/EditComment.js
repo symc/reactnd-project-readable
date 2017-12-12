@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { addComment } from '../actions';
 import { withRouter } from 'react-router';
 import NotFound from './NotFound';
+import axiosHelpers from '../utils/axiosHelpers';
 
 class EditComment extends Component {
     saveComment = (thisComment) => {
@@ -17,7 +18,11 @@ class EditComment extends Component {
         thisComment.body = commentBody;
         thisComment.author = author;
         thisComment.timestamp = timestamp;
-        this.props.addComment(thisComment, false);
+        axiosHelpers.editComment(thisComment, thisComment.id).then((response) => {
+            this.props.addComment(thisComment);
+        }).catch((error) => {
+            console.log(error);
+        });
     };
 
     render() {

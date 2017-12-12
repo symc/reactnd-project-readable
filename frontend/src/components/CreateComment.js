@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { addComment, increasePostCommentCount } from '../actions';
 import { withRouter } from 'react-router';
 import NotFound from './NotFound';
+import axiosHelpers from '../utils/axiosHelpers';
 
 class CreateComment extends Component {
     saveComment = () => {
@@ -15,8 +16,11 @@ class CreateComment extends Component {
         }
         const timestamp = Date.now();
         const parentId = this.props.match.params.id;
-        const comment = {
-            id: timestamp,
+        const CryptoJS = require('crypto-js');
+        const salt = CryptoJS.MD5(author).toString();
+        const id = CryptoJS.MD5(salt + timestamp + salt).toString();
+        const newComment = {
+            id: id,
             parentId: parentId,
             timestamp: timestamp,
             body: commentBody,
@@ -25,8 +29,12 @@ class CreateComment extends Component {
             deleted: false,
             parentDeleted: false
         };
-        this.props.addComment(comment);
-        this.props.increasePostCommentCount({id: parentId});
+        axiosHelpers.addComment(newComment).then((response) => {
+            this.props.addComment(newComment);
+            this.props.increasePostCommentCount({id: parentId});
+        }).catch((error) => {
+            console.log(error);
+        });
     };
 
     render() {

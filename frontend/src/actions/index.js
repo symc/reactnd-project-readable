@@ -97,11 +97,10 @@ export function deleteComment({id}) {
     }
 };
 
-export function addComment(comment, createId) {
+export function addComment(comment) {
     return {
         type: ADD_COMMENT,
-        comment,
-        createId
+        comment
     }
 }
 
