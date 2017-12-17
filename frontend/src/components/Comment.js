@@ -18,11 +18,11 @@ class Comment extends Component {
         return (
             <div>
                 <div className="panel panel-default">
-                    <div className="panel-heading postHeader">
+                    <div className="panel-heading post-header">
                         {thisComment.body}
                     </div>
-                    <div className="row postBanner">
-                        <div className="col-md-1 postAuthor">
+                    <div className="row post-banner">
+                        <div className="col-md-1 post-author">
                             {thisComment.author}
                         </div>
                         <div className="col-md-3">
@@ -33,7 +33,7 @@ class Comment extends Component {
                         </div>
                         <div className="col-md-1">
                             <button 
-                                className="btn btn-success btn-sm postButton"
+                                className="btn btn-success btn-sm post-button"
                                 onClick={() => {
                                     axiosHelpers.upvoteComment(thisComment.id)
                                         .then((response) => {
@@ -47,7 +47,7 @@ class Comment extends Component {
                                 +
                             </button>
                             <button 
-                                className="btn btn-danger btn-sm postButton"
+                                className="btn btn-danger btn-sm post-button"
                                 onClick={() => {
                                         axiosHelpers.downvoteComment(thisComment.id)
                                         .then((response) => {
@@ -63,13 +63,13 @@ class Comment extends Component {
                         </div>
                         <div className="col-md-3">
                             <Link
-                                className="btn btn-success btn-sm postButton"
+                                className="btn btn-success btn-sm post-button"
                                 to={`/editcomment/${thisComment.id}`}
                             >
                                 EDIT
                             </Link>
                             <button 
-                                className="btn btn-danger btn-sm postButton"
+                                className="btn btn-danger btn-sm post-button"
                                 onClick={() => {
                                     axiosHelpers.deleteComment(thisComment.id)
                                         .then((response) => {

@@ -39,7 +39,7 @@ class EditComment extends Component {
         return (
             <div>
                 <div className="panel panel-success">
-                    <div className="panel-heading postHeader">Editting a comment</div>
+                    <div className="panel-heading post-header">Editting a comment</div>
                     <div className="panel-body">
                         <div className="form-group">
                             <label>Comment</label>

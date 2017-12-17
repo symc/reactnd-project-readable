@@ -1,7 +1,3 @@
-.postHeader {
-    font-weight: bold
-}
-
 .btn {
     margin-left:2px;
 }
@@ -19,27 +15,31 @@
     margin-bottom: 10px;
 }
 
-.postBanner {
+.post-header {
+    font-weight: bold
+}
+
+.post-banner {
     margin-top: 10px;
     margin-left: 5px;
     font-family: "Courier New";
 }
 
-.postButton {
+.post-button {
     margin-bottom: 2px;
 }
 
-.addCommentButton {
+.add-comment-button {
     margin-left: 20px;
     margin-bottom: 5px;
 }
 
-.postAuthor {
+.post-author {
     font-weight: bold;
     color: #0c9b24
 }
 
-.postCategory {
+.post-category {
     font-weight: bold;
     color: #1c08d1;
 }

@@ -28,15 +28,15 @@ class Post extends Component {
         const editPage = detailsPage + '/edit';
         return (
             <div className="panel panel-info">
-                <div className="panel-heading postHeader">{thisPost.title}</div>
+                <div className="panel-heading post-header">{thisPost.title}</div>
                 <div className="panel-body">
-                    <div className="postContent">{thisPost.body}</div>
+                    <div className="post-content">{thisPost.body}</div>
                 </div>
                 <div className="row postBanner">
-                    <div className="col-md-1 postAuthor">
+                    <div className="col-md-1 post-author">
                         {thisPost.author}
                     </div>
-                    <div className="col-md-1 postCategory">
+                    <div className="col-md-1 post-category">
                         #{thisPost.category}
                     </div>
                     <div className="col-md-3">
@@ -52,7 +52,7 @@ class Post extends Component {
                             Vote: {thisPost.voteScore}
                         </div>
                         <button 
-                            className="btn btn-success btn-sm postButton"
+                            className="btn btn-success btn-sm post-button"
                             onClick={() => {
                                     axiosHelpers.upvotePost(thisPost.id)
                                     .then((response) => {
@@ -66,7 +66,7 @@ class Post extends Component {
                             +
                         </button>
                         <button 
-                            className="btn btn-danger btn-sm postButton"
+                            className="btn btn-danger btn-sm post-button"
                             onClick={() => {
                                     axiosHelpers.downvotePost(thisPost.id)
                                     .then((response) => {
@@ -84,20 +84,20 @@ class Post extends Component {
                         {
                             this.props.showDetails &&
                             <Link 
-                                className="btn btn-info btn-sm postButton" 
+                                className="btn btn-info btn-sm post-button" 
                                 to={detailsPage}
                             >
                                 DETAILS
                             </Link>
                         }              
                         <Link 
-                            className="btn btn-success btn-sm postButton" 
+                            className="btn btn-success btn-sm post-button" 
                             to={editPage}
                         >
                             EDIT
                         </Link>                       
                         <button 
-                            className="btn btn-danger btn-sm postButton"
+                            className="btn btn-danger btn-sm post-button"
                             onClick={() => {
                                     axiosHelpers.deletePost(thisPost.id)
                                     .then((response) => {

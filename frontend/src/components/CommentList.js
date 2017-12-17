@@ -12,14 +12,14 @@ class CommentList extends Component {
         return (
             <div>
                 <div className="panel panel-warning">
-                    <div className="panel-heading postHeader">Comments</div>
+                    <div className="panel-heading post-header">Comments</div>
                     <div className="panel-body">
                         {commentIds.map((id) => (
                             <Comment key={id} id={id}/>
                         ))}
                     </div>
                     <Link
-                        className="btn btn-primary addCommentButton" 
+                        className="btn btn-primary add-comment-button" 
                         to={newCommentPath}
                     >
                         Add new comment

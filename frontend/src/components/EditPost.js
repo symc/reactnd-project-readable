@@ -54,7 +54,7 @@ class CreatePost extends Component {
         return (
             <div>
                 <div className="panel panel-success">
-                    <div className="panel-heading postHeader">{panelTitle}</div>
+                    <div className="panel-heading post-header">{panelTitle}</div>
                     <div className="panel-body">
                         <div className="form-group">
                             <label>Post title</label>

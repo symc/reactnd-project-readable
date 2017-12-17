@@ -51,7 +51,7 @@ class CreateComment extends Component {
         return (
             <div>
                 <div className="panel panel-success">
-                    <div className="panel-heading postHeader">Add a new comment</div>
+                    <div className="panel-heading post-header">Add a new comment</div>
                     <div className="panel-body">
                         <div className="form-group">
                             <label>Comment</label>
