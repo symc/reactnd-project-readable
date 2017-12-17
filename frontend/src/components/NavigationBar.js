@@ -3,6 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { changeSortBy } from '../actions';
 
+/**
+* @description Represents the navigation bar. It encapsulates:
+* 1) A text called readable. On clicking, the app navigates to the main page
+* 2) A button for adding a new post
+* 3) Three buttons for sorting the posts by votes, dates and titles (alphabetical)
+* @constructor
+*/
 class NavigationBar extends Component {
     render() {
         const selectedSortMethod = `btn btn-info navbar-btn`;
@@ -42,15 +49,29 @@ class NavigationBar extends Component {
     }
 }
 
+/**
+* @description mapDispatchToProps method of NavigationBar
+* NavigationBar component is using a redux action:
+* 1) changeSortBy to change the method of sorting when displaying the posts
+* @param {Object} dispatch - dispatch object to access actions
+* @returns {Object} - an object with a function calling the store action
+*/
 function mapDispatchToProps(dispatch) {
     return {
         changeSortBy: (newSortBy) => dispatch(changeSortBy(newSortBy))
     };
 }
 
-function mapStateToProps({listState}) {
+/**
+* @description mapStateToProps method of CreatePost component
+* @param {Object} state - redux store state
+* @param {Object} ownProps - properties of the component
+* @returns {Object} - an object which contains the current sorting
+* method used by the app
+*/
+function mapStateToProps(state) {
     return {
-        sortBy: listState.sortBy
+        sortBy: state.listState.sortBy
     };
 }
 

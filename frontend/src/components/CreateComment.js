@@ -6,19 +6,36 @@ import { withRouter } from 'react-router';
 import NotFound from './NotFound';
 import axiosHelpers from '../utils/axiosHelpers';
 
+/**
+* @description Represents a view where a user can create a comment.
+* This view has two fields, one for the comment body and another for the
+* comment author, which are both editable. There are two buttons: one for
+* saving the comment and another for discarding the changes and routing
+* back to the details page of the post.
+* @constructor
+*/
 class CreateComment extends Component {
+    /**
+    * @description saves a comment both persistently on the back end server
+    * and on redux store.
+    */
     saveComment = () => {
+        // Get the comment body and author from the view
         const commentBody = document.getElementById('commentBody').value;
         let author = document.getElementById('author').value;
         // Use the name anonymous if the author field is empty
         if (author === '') {
             author = 'anonymous';
         }
+        // Record the time the comment is created
         const timestamp = Date.now();
+        // Parent id of the comment is obtained from the url
         const parentId = this.props.match.params.id;
+        // Create the unique id of the comment
         const CryptoJS = require('crypto-js');
         const salt = CryptoJS.MD5(author).toString();
         const id = CryptoJS.MD5(salt + timestamp + salt).toString();
+        // Create the new comment object
         const newComment = {
             id: id,
             parentId: parentId,
@@ -29,8 +46,11 @@ class CreateComment extends Component {
             deleted: false,
             parentDeleted: false
         };
+        // Save the new comment persistently in the back end server
         axiosHelpers.addComment(newComment).then((response) => {
+            // then save the comment in the redux store
             this.props.addComment(newComment);
+            // and update the comment count of the parent post
             this.props.increasePostCommentCount({id: parentId});
         }).catch((error) => {
             console.log(error);
@@ -38,16 +58,28 @@ class CreateComment extends Component {
     };
 
     render() {
+        // Get the parent post of this comment and category of this
+        // parent post
         const thisPost = this.props.post;
         const category = this.props.match.params.category;
+
+        // If parent post of this comment is falsy or the category of the 
+        // parent post does not match with the category obtained from the
+        // url, then the post represented by this URL does not exist. Render
+        // the NotFound component.
         if (!thisPost || thisPost.category !== category) {
             return (
                 <NotFound/>
             )
         }
-        
+
+        // Construct the string postDetailsPath, which represents the url
+        // of the page that shows the details of the parent post. If the user
+        // clicks to discard, the app will navigate to this address
         const id = this.props.match.params.id;
         const postDetailsPath = `/${category}/${id}`;
+
+        // Render the view
         return (
             <div>
                 <div className="panel panel-success">
@@ -83,6 +115,14 @@ class CreateComment extends Component {
     }
 }
 
+/**
+* @description mapDispatchToProps method of CreateComment
+* CreateComment component is using two redux actions:
+* 1) addComment to add the comment to the redux store
+* 2) increasePostCommentCound to add the comment count of the parent post
+* @param {Object} dispatch - dispatch object to access actions
+* @returns {Object} - an object with two functions calling the store actions
+*/
 function mapDispatchToProps(dispatch) {
     return {
         addComment: (post) => dispatch(addComment(post)),
@@ -90,8 +130,17 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
+/**
+* @description mapStateToProps method of CreateComment
+* @param {Object} state - redux store state
+* @returns {Object} - an object with a single field post,
+* which contains a post object from the redux store whose
+* id matches with the post id obtained from the url
+*/
 const mapStateToProps = (state, ownProps) => {
+    // Get the parent post id from the url
     const postId = ownProps.match.params.id;
+    // and return the state with same id from the store
     return {
         post: state.posts[postId]
     };

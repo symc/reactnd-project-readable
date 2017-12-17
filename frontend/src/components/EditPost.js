@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { addPost } from '../actions';
 import { withRouter } from 'react-router';
 import NotFound from './NotFound';
 import axiosHelpers from '../utils/axiosHelpers';
+import MutablePost from './MutablePost';
 
-class CreatePost extends Component {
+/**
+* @description Represents a view where a user can edit a post. Renders 
+* a mutable post object with the appropriate fields so that user can
+* edit a post using the mutable post
+* @constructor
+*/
+class EditPost extends Component {
     savePost = (thisPost) => {
         let title = document.getElementById('title').value;
         const postBody = document.getElementById('postBody').value;
@@ -20,13 +26,17 @@ class CreatePost extends Component {
         if (title === '') {
             title = '[No title]';
         }
+        // Record the time the comment is created
         const timestamp = Date.now();
+        // Edit the current post
         thisPost.title = title;
         thisPost.body = postBody;
         thisPost.author = author;
         thisPost.category = category;
         thisPost.timestamp = timestamp
+        // Save the edited post persistently in the back end
         axiosHelpers.addPost(thisPost).then((response) => {
+            // then, save it to the redux store
             this.props.addPost(thisPost)
         }).catch((error) => {
             console.log(error);
@@ -34,14 +44,21 @@ class CreatePost extends Component {
     };
 
     render() {
+        // Get the post which is being edited currently and the category
+        // of this post from the url
         const thisPost = this.props.post;
         const category = this.props.match.params.category;
+
+        // If the post is falsy or the category of the post does not match 
+        // with the category obtained from the url, then the post represented
+        // by this URL does not exist. Render the NotFound component.
         if (!thisPost || thisPost.category !== category) {
             return (
                 <NotFound/>
             )
         }
 
+        // Define the fields and onClick call of the mutable post
         const categoryIds = this.props.categoryIds;
         const panelTitle = "Editing the post";
         const id = this.props.match.params.id;
@@ -51,72 +68,29 @@ class CreatePost extends Component {
         const initialAuthor = thisPost.author;
         const initialCategory = thisPost.category;
         const onClickFunction = () => this.savePost(thisPost);
+        // Render the mutable post
         return (
-            <div>
-                <div className="panel panel-success">
-                    <div className="panel-heading post-header">{panelTitle}</div>
-                    <div className="panel-body">
-                        <div className="form-group">
-                            <label>Post title</label>
-                            <input 
-                                type="text"
-                                className="form-control"
-                                id="title"
-                                defaultValue={initialTitle}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Post body</label>
-                            <textarea 
-                                className="form-control" 
-                                rows="5"
-                                id="postBody"
-                                defaultValue={initialBody}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Post author</label>
-                            <input 
-                                type="text"
-                                className="form-control"
-                                id="author"
-                                defaultValue={initialAuthor}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Category</label>
-                            <select 
-                                id="category"
-                                className="form-control"
-                                defaultValue={initialCategory}
-                            >
-                                {categoryIds.map((id) => (
-                                    <option key={id}>{id}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="form-group">
-                            <Link
-                                className="btn btn-primary"
-                                to='/'
-                                onClick={onClickFunction}
-                            >
-                                Save
-                            </Link>
-                            <Link 
-                                className="btn btn-danger"
-                                to={discardPath}
-                            >
-                                Discard
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <MutablePost
+                categoryIds = {categoryIds}
+                panelTitle = {panelTitle}
+                discardPath = {discardPath}
+                initialTitle = {initialTitle}
+                initialBody = {initialBody}
+                initialAuthor = {initialAuthor}
+                initialCategory = {initialCategory}
+                onClickFunction = {onClickFunction}
+            />
         );
     }
 }
 
+/**
+* @description mapDispatchToProps method of EditPost
+* EditPost component is using a redux action:
+* 1) addPost to add the comment to the redux store
+* @param {Object} dispatch - dispatch object to access actions
+* @returns {Object} - an object with a function calling the store action
+*/
 function mapDispatchToProps(dispatch) {
     return {
         addPost: (post, createId) => 
@@ -124,6 +98,13 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
+/**
+* @description mapStateToProps method of CreatePost component
+* @param {Object} state - redux store state
+* @param {Object} ownProps - properties of the component
+* @returns {Object} - an object which contains the current post 
+* being edited and available categories.
+*/
 const mapStateToProps = (state, ownProps) => {
     const postId = ownProps.match.params.id;
     return {
@@ -135,4 +116,4 @@ const mapStateToProps = (state, ownProps) => {
 export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(CreatePost));
+)(EditPost));

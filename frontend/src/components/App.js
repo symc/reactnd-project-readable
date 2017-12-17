@@ -14,9 +14,19 @@ import '../styles/App.css';
 import axiosHelpers from '../utils/axiosHelpers';
 import { initializePosts, initializeCategories } from '../actions';
 
+/**
+* @description Represents the main component where the app lives
+* @constructor
+*/
 class App extends Component {
+    /**
+    * @description componentDidMount method of the App
+    * Gets all categories and posts from the backend server
+    * and uses the returned values from the server to initialize
+    * the redux store.
+    */
     componentDidMount() {
-        // Initialize categories in redux store
+        // Get categories from the server
         axiosHelpers.getCategories().then((response) => {
             let categories = {};
             response.data['categories'].forEach((element) => {
@@ -25,11 +35,13 @@ class App extends Component {
                     [element.name]: element
                 };
             });
+            // then, initialize categories in redux store
             this.props.initializeCategories(categories);
         }).catch((error) => {
             console.log(error);
         });
-        // Initialize posts in redux store
+
+        // Get posts from the server
         axiosHelpers.getPosts().then((response) => {
             let posts = {};
             response.data.forEach((element) => {
@@ -38,11 +50,13 @@ class App extends Component {
                     [element.id]: element
                 };
             });
+            // then, initialize posts in redux store
             this.props.initializePosts(posts);
         }).catch((error) => {
             console.log(error);
         });
     }
+
     render() {
         return (
             <div className="App">
@@ -63,6 +77,14 @@ class App extends Component {
     }
 }
 
+/**
+* @description mapDispatchToProps method of App
+* App component is using two redux actions:
+* 1) initializePost to initialize the posts in redux store
+* 2) initializeCategories to initialize the categories redux store
+* @param {Object} dispatch - dispatch object to access actions
+* @returns {Object} - an object with two functions calling the store actions
+*/
 function mapDispatchToProps(dispatch) {
     return {
         initializePosts: (posts) => dispatch(initializePosts(posts)),
@@ -70,15 +92,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-function mapStateToProps({categories, posts, comments}) {
-    return {
-        categories,
-        posts,
-        comments
-    };
-}
-
 export default withRouter(connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(App));
