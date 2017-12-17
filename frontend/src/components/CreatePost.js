@@ -53,6 +53,7 @@ class CreatePost extends Component {
             // then save the post to the redux store
             this.props.addPost(newPost)
         }).catch((error) => {
+            window.alert(axiosHelpers.networkErrorMessage);
             console.log(error);
         });
     };

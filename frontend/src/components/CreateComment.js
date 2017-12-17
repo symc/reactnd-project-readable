@@ -53,6 +53,7 @@ class CreateComment extends Component {
             // and update the comment count of the parent post
             this.props.increasePostCommentCount({id: parentId});
         }).catch((error) => {
+            window.alert(axiosHelpers.networkErrorMessage);
             console.log(error);
         });
     };

@@ -59,17 +59,17 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
+            <div className='App'>
                 {/*Show the navigation bars in all views*/}
                 <NavigationBar/>
                 <Switch>
-                    <Route exact path = "/" component={PostList} />
-                    <Route exact path = "/newpost" component={CreatePost} />
-                    <Route exact path = "/editcomment/:commentid" component={EditComment} />
-                    <Route exact path = "/:category" component={PostList} />
-                    <Route exact path = "/:category/:id" component={PostDetails} />
-                    <Route exact path = "/:category/:id/newcomment" component={CreateComment} />
-                    <Route path = "/:category/:id/edit" component={EditPost} />
+                    <Route exact path = '/' component={PostList} />
+                    <Route exact path = '/newpost' component={CreatePost} />
+                    <Route exact path = '/editcomment/:commentid' component={EditComment} />
+                    <Route exact path = '/:category' component={PostList} />
+                    <Route exact path = '/:category/:id' component={PostDetails} />
+                    <Route exact path = '/:category/:id/newcomment' component={CreateComment} />
+                    <Route path = '/:category/:id/edit' component={EditPost} />
                     <Route component={NotFound}/>
                 </Switch>
             </div>

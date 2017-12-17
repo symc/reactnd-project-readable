@@ -34,6 +34,7 @@ class PostDetails extends Component {
             // and update the redux store
             this.props.updateComments(comments);
         }).catch((error) => {
+            window.alert(axiosHelpers.networkErrorComments);
             console.log(error);
         });
     }

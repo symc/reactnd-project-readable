@@ -42,6 +42,7 @@ class Comment extends Component {
                                             // then upvote it in the redux store
                                             this.props.upvoteComment({id: thisComment.id})
                                         }).catch((error) => {
+                                            window.alert(axiosHelpers.networkErrorMessage);
                                             console.log(error);
                                         });
                                     }
@@ -58,6 +59,7 @@ class Comment extends Component {
                                             // then downvote it in the redux store
                                             this.props.downvoteComment({id: thisComment.id})
                                         }).catch((error) => {
+                                            window.alert(axiosHelpers.networkErrorMessage);
                                             console.log(error);
                                         });
                                     }
@@ -86,6 +88,7 @@ class Comment extends Component {
                                                 {id: thisComment.parentId}
                                             );
                                         }).catch((error) => {
+                                            window.alert(axiosHelpers.networkErrorMessage);
                                             console.log(error);
                                         });
                                     }

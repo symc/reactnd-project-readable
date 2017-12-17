@@ -40,6 +40,7 @@ class EditComment extends Component {
             // then, save it to the redux store
             this.props.addComment(thisComment);
         }).catch((error) => {
+            window.alert(axiosHelpers.networkErrorMessage);
             console.log(error);
         });
     };

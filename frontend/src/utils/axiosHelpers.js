@@ -47,7 +47,9 @@ const axiosHelpers = {
     },
     deleteComment: (id) => {
         return axios.delete(baseURL + `/comments/${id}`, config);
-    }
+    },
+    networkErrorMessage: 'Network connection failed. Requested action will not be completed.',
+    networkErrorComments: 'Network connection failed. Unable to update the comments'
 };
 
 module.exports = axiosHelpers; 

@@ -39,6 +39,7 @@ class EditPost extends Component {
             // then, save it to the redux store
             this.props.addPost(thisPost)
         }).catch((error) => {
+            window.alert(axiosHelpers.networkErrorMessage);
             console.log(error);
         });
     };

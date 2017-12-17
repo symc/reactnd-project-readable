@@ -51,6 +51,7 @@ class Post extends Component {
                                         // then, upvote it in the redux store
                                         this.props.upvotePost({id: thisPost.id})
                                     }).catch((error) => {
+                                        window.alert(axiosHelpers.networkErrorMessage);
                                         console.log(error);
                                     });
                                 }
@@ -67,6 +68,7 @@ class Post extends Component {
                                         // then, downvote it in the redux store
                                         this.props.downvotePost({id: thisPost.id})
                                     }).catch((error) => {
+                                        window.alert(axiosHelpers.networkErrorMessage);
                                         console.log(error);
                                     });
                                 }
@@ -100,6 +102,7 @@ class Post extends Component {
                                         // then delete it from the redux store
                                         this.props.deletePost({id: thisPost.id})
                                     }).catch((error) => {
+                                        window.alert(axiosHelpers.networkErrorMessage);
                                         console.log(error);
                                     });
                                 }
