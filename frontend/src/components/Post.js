@@ -3,25 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { upvotePost, downvotePost, deletePost } from '../actions';
 import axiosHelpers from '../utils/axiosHelpers';
+import {commentString, dateString} from '../utils/formatHelpers';
 
 class Post extends Component {
-    commentString = (commentCount) => {
-        if (commentCount === 0) {
-            return 'No comments';
-        } else if (commentCount === 1) {
-            return '1 comment';
-        } else {
-            return `${commentCount} comments`;
-        }
-    };
-    
-    dateString = (timestamp) => {
-        const date = new Date(timestamp);
-        const day = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
-        const hour = `${date.getHours()}:${(date.getMinutes() < 10) ? '0' : ''}${date.getMinutes()}`
-        return (`${day} ${hour}`);
-    }
-
     render() {
         const thisPost = this.props.post;
         const detailsPage = `/${this.props.post.category}/${this.props.post.id}`;
@@ -32,7 +16,7 @@ class Post extends Component {
                 <div className="panel-body">
                     <div className="post-content">{thisPost.body}</div>
                 </div>
-                <div className="row postBanner">
+                <div className="row post-banner">
                     <div className="col-md-1 post-author">
                         {thisPost.author}
                     </div>
@@ -41,10 +25,10 @@ class Post extends Component {
                     </div>
                     <div className="col-md-3">
                         <div className="col-md-5">
-                            {this.commentString(thisPost.commentCount)}
+                            {commentString(thisPost.commentCount)}
                         </div>
                         <div className="col-md-5">
-                            {this.dateString(thisPost.timestamp)}
+                            {dateString(thisPost.timestamp)}
                         </div>
                     </div>
                     <div className="col-md-2">

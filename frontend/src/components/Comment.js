@@ -4,15 +4,9 @@ import { upvoteComment, downvoteComment, deleteComment } from '../actions';
 import { decreasePostCommentCount} from '../actions';
 import { Link } from 'react-router-dom';
 import axiosHelpers from '../utils/axiosHelpers';
+import { dateString } from '../utils/formatHelpers';
 
 class Comment extends Component {
-    dateString = (timestamp) => {
-        const date = new Date(timestamp);
-        const day = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
-        const hour = `${date.getHours()}:${(date.getMinutes() < 10) ? '0' : ''}${date.getMinutes()}`
-        return (`${day} ${hour}`);
-    }
-
     render() {
         const thisComment = this.props.comment;
         return (
@@ -26,7 +20,7 @@ class Comment extends Component {
                             {thisComment.author}
                         </div>
                         <div className="col-md-3">
-                            {this.dateString(thisComment.timestamp)}
+                            {dateString(thisComment.timestamp)}
                         </div>
                         <div className="col-md-1">
                             Vote: {thisComment.voteScore}
