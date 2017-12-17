@@ -60,12 +60,12 @@ class CreatePost extends Component {
     render() {
         // Define the fields and onClick call of the mutable post
         const categoryIds = this.props.categoryIds;
-        const panelTitle = "Add a new post";
-        const discardPath = "/";
-        const initialTitle = "";
-        const initialBody = "";
-        const initialAuthor = "";
-        const initialCategory = "";
+        const panelTitle = 'Add a new post';
+        const discardPath = '/';
+        const initialTitle = '';
+        const initialBody = '';
+        const initialAuthor = '';
+        const initialCategory = '';
         const onClickFunction = () => this.savePost();
         // Render the mutable post
         return (

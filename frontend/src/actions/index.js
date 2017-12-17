@@ -1,101 +1,107 @@
-export const CHANGE_SORTBY = 'CHANGE_SORTBY';
+/* Constants for categories */
+export const INITIALIZE_CATEGORIES = 'INITIALIZE_CATEGORIES';
+
+/* Constants for posts */
 export const UPVOTE_POST = 'UPVOTE_POST';
 export const DOWNVOTE_POST = 'DOWNVOTE_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const ADD_POST = 'ADD_POST';
-export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
 export const INCREASE_POST_COMMENT_COUNT = 'INCREASE_POST_COMMENT_COUNT';
 export const DECREASE_POST_COMMENT_COUNT = 'DECREASE_POST_COMMENT_COUNT';
+
+/* Constants for comments */
+export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const INITIALIZE_POSTS = 'INITIALIZE_POSTS';
-export const INITIALIZE_CATEGORIES = 'INITIALIZE_CATEGORIES';
 export const UPDATE_COMMENTS = 'UPDATE_COMMENTS';
 
-export function changeSortBy({sortBy}) {
-    return {
-        type: CHANGE_SORTBY,
-        sortBy
-    }
-};
+/* Constants for listState */
+export const CHANGE_SORTBY = 'CHANGE_SORTBY';
+
+/* Actions for categories */
 
 export function initializeCategories(initialState) {
     return {
         type: INITIALIZE_CATEGORIES,
         initialState
     }
-};
+}
+
+/* Actions for posts */
 
 export function initializePosts(initialState) {
     return {
         type: INITIALIZE_POSTS,
         initialState
     }
-};
+}
 
 export function upvotePost({id}) {
     return {
         type: UPVOTE_POST,
         id
     }
-};
+}
 
 export function downvotePost({id}) {
     return {
         type: DOWNVOTE_POST,
         id
     }
-};
+}
 
 export function deletePost({id}) {
     return {
         type: DELETE_POST,
         id
     }
-};
+}
 
 export function addPost(post) {
     return {
         type: ADD_POST,
         post
     }
-};
+}
 
 export function increasePostCommentCount({id}) {
     return {
         type: INCREASE_POST_COMMENT_COUNT,
         id
     }
-};
+}
 
 export function decreasePostCommentCount({id}) {
     return {
         type: DECREASE_POST_COMMENT_COUNT,
         id
     }
-};
+}
+
+/* Actions for comments */
 
 export function upvoteComment({id}) {
     return {
         type: UPVOTE_COMMENT,
         id
     }
-};
+}
 
 export function downvoteComment({id}) {
     return {
         type: DOWNVOTE_COMMENT,
         id
     }
-};
+}
 
 export function deleteComment({id}) {
     return {
         type: DELETE_COMMENT,
         id
     }
-};
+}
 
 export function addComment(comment) {
     return {
@@ -108,5 +114,14 @@ export function updateComments(comments) {
     return {
         type: UPDATE_COMMENTS,
         comments
+    }
+}
+
+/* Actions for listState */
+
+export function changeSortBy({sortBy}) {
+    return {
+        type: CHANGE_SORTBY,
+        sortBy
     }
 }

@@ -1,11 +1,16 @@
 const axios = require('axios');
 
+//Define an authorization header
 const config = {
     headers: {'Authorization': 'readable-auth'}
 };
 
+// Define the base url. The server listens on port 3001
 const baseURL = 'http://localhost:3001';
 
+// The object axios helpers contains a list of methods that can be used to
+// communicate with the back end server. For the details of these functions,
+// please see the readme file of the backend server.
 const axiosHelpers = {
     getCategories: () => {
         return axios.get(baseURL + '/categories', config);

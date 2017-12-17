@@ -13,18 +13,18 @@ class CommentList extends Component {
     render() {
         const commentIds = this.props.commentList;
         const currentPath = this.props.location.pathname;
-        const newCommentPath = currentPath + '/newcomment'
+        const newCommentPath = currentPath + '/newcomment';
         return (
             <div>
-                <div className="panel panel-warning">
-                    <div className="panel-heading post-header">Comments</div>
-                    <div className="panel-body">
+                <div className='panel panel-warning'>
+                    <div className='panel-heading post-header'>Comments</div>
+                    <div className='panel-body'>
                         {commentIds.map((id) => (
-                            <Comment key={id} id={id}/>
+                            <Comment key={id} id={id} />
                         ))}
                     </div>
                     <Link
-                        className="btn btn-primary add-comment-button" 
+                        className='btn btn-primary add-comment-button'
                         to={newCommentPath}
                     >
                         Add new comment
@@ -47,11 +47,12 @@ const mapStateToProps = (state, ownProps) => {
     return {
         // Get all comments from the store
         commentList: Object.entries(state.comments)
-        .filter((comment) => {
-            // then filter the ones where the parent id
-            // of the comment matches the provided id
-            // as a parameter
-            return (comment[1].parentId === postId)})
+            .filter((comment) => {
+                // then filter the ones where the parent id
+                // of the comment matches the provided id
+                // as a parameter
+                return (comment[1].parentId === postId)
+            })
             .map((comment) => {
                 // then return the comment id of each element
                 return comment[0];

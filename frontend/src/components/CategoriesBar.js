@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 /**
 * @description Represents a bar which contains available categories
-* and a "Show all categories" button. Users can click these buttons
+* and a 'Show all categories' button. Users can click these buttons
 * to filter the displayed posts by category.
 * @constructor
 */
@@ -13,9 +13,9 @@ class CategoriesBar extends Component {
     render() {
         const categoryIds = this.props.categoryIds;
         return (
-            <nav className="navbar navbar-default">
-                <div className="container-fluid">
-                    <Link to='/' className="btn btn-primary btn-sml navbar-btn">
+            <nav className='navbar navbar-default'>
+                <div className='container-fluid'>
+                    <Link to='/' className='btn btn-primary btn-sml navbar-btn'>
                         Show all categories
                     </Link>
                     {categoryIds.map((id) => (

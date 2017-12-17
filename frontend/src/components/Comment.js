@@ -17,23 +17,23 @@ class Comment extends Component {
         const thisComment = this.props.comment;
         return (
             <div>
-                <div className="panel panel-default">
-                    <div className="panel-heading post-header">
+                <div className='panel panel-default'>
+                    <div className='panel-heading post-header'>
                         {thisComment.body}
                     </div>
-                    <div className="row post-banner">
-                        <div className="col-md-1 post-author">
+                    <div className='row post-banner'>
+                        <div className='col-md-1 post-author'>
                             {thisComment.author}
                         </div>
-                        <div className="col-md-3">
+                        <div className='col-md-3'>
                             {dateString(thisComment.timestamp)}
                         </div>
-                        <div className="col-md-1">
+                        <div className='col-md-1'>
                             Vote: {thisComment.voteScore}
                         </div>
-                        <div className="col-md-1">
+                        <div className='col-md-1'>
                             <button 
-                                className="btn btn-success btn-sm post-button"
+                                className='btn btn-success btn-sm post-button'
                                 onClick={() => {
                                     // Upvote the comment in the back end
                                     axiosHelpers.upvoteComment(thisComment.id)
@@ -49,7 +49,7 @@ class Comment extends Component {
                                 +
                             </button>
                             <button 
-                                className="btn btn-danger btn-sm post-button"
+                                className='btn btn-danger btn-sm post-button'
                                 onClick={() => {
                                         // Downvote the comment in the back end
                                         axiosHelpers.downvoteComment(thisComment.id)
@@ -65,15 +65,15 @@ class Comment extends Component {
                                 -
                             </button>
                         </div>
-                        <div className="col-md-3">
+                        <div className='col-md-3'>
                             <Link
-                                className="btn btn-success btn-sm post-button"
+                                className='btn btn-success btn-sm post-button'
                                 to={`/editcomment/${thisComment.id}`}
                             >
                                 EDIT
                             </Link>
                             <button 
-                                className="btn btn-danger btn-sm post-button"
+                                className='btn btn-danger btn-sm post-button'
                                 onClick={() => {
                                     // Delete the comment in the back end
                                     axiosHelpers.deleteComment(thisComment.id)

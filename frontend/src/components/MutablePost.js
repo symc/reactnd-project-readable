@@ -24,41 +24,41 @@ class MutablePost extends Component {
         const onClickFunction = this.props.onClickFunction;
         return (
             <div>
-                <div className="panel panel-success">
-                    <div className="panel-heading post-header">{panelTitle}</div>
-                    <div className="panel-body">
-                        <div className="form-group">
+                <div className='panel panel-success'>
+                    <div className='panel-heading post-header'>{panelTitle}</div>
+                    <div className='panel-body'>
+                        <div className='form-group'>
                             <label>Post title</label>
                             <input 
-                                type="text"
-                                className="form-control"
-                                id="title"
+                                type='text'
+                                className='form-control'
+                                id='title'
                                 defaultValue={initialTitle}
                             />
                         </div>
-                        <div className="form-group">
+                        <div className='form-group'>
                             <label>Post body</label>
                             <textarea 
-                                className="form-control" 
-                                rows="5"
-                                id="postBody"
+                                className='form-control' 
+                                rows='5'
+                                id='postBody'
                                 defaultValue={initialBody}
                             />
                         </div>
-                        <div className="form-group">
+                        <div className='form-group'>
                             <label>Post author</label>
                             <input 
-                                type="text"
-                                className="form-control"
-                                id="author"
+                                type='text'
+                                className='form-control'
+                                id='author'
                                 defaultValue={initialAuthor}
                             />
                         </div>
-                        <div className="form-group">
+                        <div className='form-group'>
                             <label>Category</label>
                             <select 
-                                id="category"
-                                className="form-control"
+                                id='category'
+                                className='form-control'
                                 defaultValue={initialCategory}
                             >
                                 {categoryIds.map((id) => (
@@ -66,16 +66,16 @@ class MutablePost extends Component {
                                 ))}
                             </select>
                         </div>
-                        <div className="form-group">
+                        <div className='form-group'>
                             <Link
-                                className="btn btn-primary"
+                                className='btn btn-primary'
                                 to='/'
                                 onClick={onClickFunction}
                             >
                                 Save
                             </Link>
                             <Link 
-                                className="btn btn-danger"
+                                className='btn btn-danger'
                                 to={discardPath}
                             >
                                 Discard

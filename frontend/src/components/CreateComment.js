@@ -70,7 +70,7 @@ class CreateComment extends Component {
         if (!thisPost || thisPost.category !== category) {
             return (
                 <NotFound/>
-            )
+            );
         }
 
         // Construct the string postDetailsPath, which represents the url
@@ -82,27 +82,27 @@ class CreateComment extends Component {
         // Render the view
         return (
             <div>
-                <div className="panel panel-success">
-                    <div className="panel-heading post-header">Add a new comment</div>
-                    <div className="panel-body">
-                        <div className="form-group">
+                <div className='panel panel-success'>
+                    <div className='panel-heading post-header'>Add a new comment</div>
+                    <div className='panel-body'>
+                        <div className='form-group'>
                             <label>Comment</label>
-                            <input type="text" className="form-control" id="commentBody"/>
+                            <input type='text' className='form-control' id='commentBody'/>
                         </div>
-                        <div className="form-group">
+                        <div className='form-group'>
                             <label>Comment author</label>
-                            <input type="text" className="form-control" id="author"/>
+                            <input type='text' className='form-control' id='author'/>
                         </div>
-                        <div className="form-group">
+                        <div className='form-group'>
                             <Link
-                                className="btn btn-primary"
+                                className='btn btn-primary'
                                 to={postDetailsPath}
                                 onClick={() => this.saveComment()}
                             >
                                 Save
                             </Link>
                             <Link 
-                                className="btn btn-danger"
+                                className='btn btn-danger'
                                 to={postDetailsPath}
                             >
                                 Discard

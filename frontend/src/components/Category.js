@@ -12,7 +12,7 @@ class Category extends Component {
         const thisCategory = this.props.category;
         const categoryPage = `/${thisCategory.name}`;
         return (
-            <Link to={categoryPage} className="btn btn-primary btn-sml navbar-btn">
+            <Link to={categoryPage} className='btn btn-primary btn-sml navbar-btn'>
                 {thisCategory.name}
             </Link>
         );

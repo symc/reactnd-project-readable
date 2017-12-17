@@ -9,7 +9,7 @@ import { Redirect } from 'react-router';
 class NotFound extends Component {
     render() {
         return (
-            <Redirect to="/"/>
+            <Redirect to='/'/>
         );
     }
 }

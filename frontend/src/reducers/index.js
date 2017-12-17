@@ -17,6 +17,8 @@ import {
     UPDATE_COMMENTS
 } from '../actions';
 
+
+/* Categories reducer, which maintains the list of available categories */
 function categories(state = {}, action) {
     switch (action.type) {
         case INITIALIZE_CATEGORIES:
@@ -26,6 +28,7 @@ function categories(state = {}, action) {
     }
 }
 
+/* Posts reducer, which maintains the list of posts */
 function posts(state = {}, action) {
     switch (action.type) {
         case INITIALIZE_POSTS:
@@ -77,6 +80,7 @@ function posts(state = {}, action) {
     }
 }
 
+/* Comments reducer, which maintains the list of comments */
 function comments(state = {}, action) {
     switch (action.type) {
         case UPVOTE_COMMENT:
@@ -113,8 +117,12 @@ function comments(state = {}, action) {
     }
 }
 
+/* listState reducer, which stores the method of sorting used by the app to
+ * to sort the posts. The sorting is only performed on the posts. Comments
+ * are not sorted.
+ */
 const initialListState = {
-    sortBy : "votes",
+    sortBy : 'votes',
 };
 
 function listState(state = initialListState, action) {

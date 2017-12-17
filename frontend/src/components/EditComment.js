@@ -57,7 +57,7 @@ class EditComment extends Component {
         if (!thisPost || !thisComment) {
             return (
                 <NotFound/>
-            )
+            );
         }
 
         // Construct the string postDetailsPath, which represents the url
@@ -70,37 +70,37 @@ class EditComment extends Component {
         // Render the view
         return (
             <div>
-                <div className="panel panel-success">
-                    <div className="panel-heading post-header">Editing a comment</div>
-                    <div className="panel-body">
-                        <div className="form-group">
+                <div className='panel panel-success'>
+                    <div className='panel-heading post-header'>Editing a comment</div>
+                    <div className='panel-body'>
+                        <div className='form-group'>
                             <label>Comment</label>
                             <input 
-                                type="text"
-                                className="form-control"
-                                id="commentBody"
+                                type='text'
+                                className='form-control'
+                                id='commentBody'
                                 defaultValue={thisComment.body}
                             />
                         </div>
-                        <div className="form-group">
+                        <div className='form-group'>
                             <label>Comment author</label>
                             <input 
-                                type="text"
-                                className="form-control"
-                                id="author"
+                                type='text'
+                                className='form-control'
+                                id='author'
                                 defaultValue={thisComment.author}
                             />
                         </div>
-                        <div className="form-group">
+                        <div className='form-group'>
                             <Link
-                                className="btn btn-primary"
+                                className='btn btn-primary'
                                 to={postDetailsPath}
                                 onClick={() => this.saveComment(thisComment)}
                             >
                                 Save
                             </Link>
                             <Link 
-                                className="btn btn-danger"
+                                className='btn btn-danger'
                                 to={postDetailsPath}
                             >
                                 Discard

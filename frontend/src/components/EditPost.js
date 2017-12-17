@@ -33,7 +33,7 @@ class EditPost extends Component {
         thisPost.body = postBody;
         thisPost.author = author;
         thisPost.category = category;
-        thisPost.timestamp = timestamp
+        thisPost.timestamp = timestamp;
         // Save the edited post persistently in the back end
         axiosHelpers.addPost(thisPost).then((response) => {
             // then, save it to the redux store
@@ -55,12 +55,12 @@ class EditPost extends Component {
         if (!thisPost || thisPost.category !== category) {
             return (
                 <NotFound/>
-            )
+            );
         }
 
         // Define the fields and onClick call of the mutable post
         const categoryIds = this.props.categoryIds;
-        const panelTitle = "Editing the post";
+        const panelTitle = 'Editing the post';
         const id = this.props.match.params.id;
         const discardPath = `/${category}/${id}`;
         const initialTitle = thisPost.title;

@@ -16,12 +16,12 @@ class NavigationBar extends Component {
         const unselectedSortMethod = `btn btn-warning navbar-btn`;
         const sortBy = this.props.sortBy;
         return (
-        <nav className="navbar navbar-inverse">
-                <div className="container-fluid">
-                    <div className="navbar-header">
-                        <Link to="/" className="navbar-brand">Readable</Link>
+        <nav className='navbar navbar-inverse'>
+                <div className='container-fluid'>
+                    <div className='navbar-header'>
+                        <Link to='/' className='navbar-brand'>Readable</Link>
                     </div>
-                    <Link to="/newpost" className="btn btn-success navbar-btn">Add new post</Link>
+                    <Link to='/newpost' className='btn btn-success navbar-btn'>Add new post</Link>
                     <button 
                         className={(sortBy === 'votes') ? 
                             selectedSortMethod : unselectedSortMethod}
