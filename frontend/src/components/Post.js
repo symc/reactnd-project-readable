@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { upvotePost, downvotePost, deletePost } from '../actions';
 import axiosHelpers from '../utils/axiosHelpers';
 import {commentString, dateString} from '../utils/formatHelpers';
+import PropTypes from 'prop-types';
 
 /**
 * @description Represents a post in the main page.
@@ -142,6 +143,11 @@ const mapStateToProps = (state, ownProps) => {
         post: state.posts[postId]
     };
 }
+
+Post.propTypes = {
+    id: PropTypes.string.isRequired,
+    showDetails: PropTypes.bool.isRequired
+};
 
 export default connect(
     mapStateToProps,

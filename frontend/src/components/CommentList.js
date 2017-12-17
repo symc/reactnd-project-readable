@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Comment from './Comment';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
 
 /**
 * @description Represents a list of comments. Each list encapsulates
@@ -58,6 +59,10 @@ const mapStateToProps = (state, ownProps) => {
                 return comment[0];
             })
     };
+};
+
+CommentList.propTypes = {
+    id: PropTypes.string.isRequired
 };
 
 export default withRouter(connect(

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 /**
 * @description Represents a category button. On clicking, this button
@@ -32,6 +33,10 @@ const mapStateToProps = (state, ownProps) => {
     return {
         category: state.categories[categoryId]
     };
+};
+
+Category.propTypes = {
+    id: PropTypes.string.isRequired
 };
 
 export default connect(

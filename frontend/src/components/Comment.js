@@ -5,6 +5,7 @@ import { decreasePostCommentCount} from '../actions';
 import { Link } from 'react-router-dom';
 import axiosHelpers from '../utils/axiosHelpers';
 import { dateString } from '../utils/formatHelpers';
+import PropTypes from 'prop-types';
 
 /**
 * @description Represents a comment. Each comment has a comment 
@@ -132,6 +133,10 @@ const mapStateToProps = (state, ownProps) => {
     return {
         comment: state.comments[commentId]
     };
+};
+
+Comment.propTypes = {
+    id: PropTypes.string.isRequired
 };
 
 export default connect(
