@@ -41,7 +41,7 @@ class NavigationBar extends Component {
                             selectedSortMethod : unselectedSortMethod}
                         onClick={() => this.props.changeSortBy({sortBy: 'titles'})}
                     >
-                        Sort posts by title
+                        Sort posts by titles
                     </button>
                 </div>
             </nav>
