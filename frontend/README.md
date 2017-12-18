@@ -11,16 +11,14 @@ Navigation Bar is located at the topmost part of the single page app. In all the
 - 'Sort posts by titles': Change the sorting method used in the main page to sorting by titles. The posts on the main page will be sorted by post title (using standard string comparison).
 
 ### Category Bar
-Category Bar is located under the Navigation Bar. Category Bar has the following clickable objects.
+Category Bar is located under the Navigation Bar. Currently, there are three available categories: react, redux and udacity. Category Bar is not visible when creating/editing a post/comment and when displaying the details of a post. Category Bar has the following clickable objects.
 - 'Show all categories': Show all posts
 - '["Category name"]': Show all posts under category 'Category name'
-Currently, there are three available categories: react, redux and udacity. Category Bar is not visible when creating/editing a post/comment and when displaying the details of a post.
+
 
 ### Posts
-Under the Category Bar, there is a list of posts. Each post is displayed in a panel, where
-- The topmost blue part is the post title
-- The text under the title is the post body
-- The part under the text is the post banner
+Under the Category Bar, there is a list of posts. Each post is displayed in a panel, where the topmost blue part is the post title, the text under the title is the post body and the part under the text is the post banner.
+
 Each post banner contains (from left to right):
 - a green text displaying the author name
 - a blue text displaying # followed by the category name
@@ -33,13 +31,12 @@ Each post banner contains (from left to right):
 - a button which can be used to delete the post
 
 ### Post details and comments
-By clicking the Details button of the post, you can display the post details. This view will show the post on top (without the details button) and the comments about this post under the post. Each comment in this view contains
+By clicking the Details button of the post, you can display the post details. This view will show the post on top (without the details button) and the comments about this post under the post. A comment can be upvoted, downvoted, edited or deleted, just like a post. At the bottom of the list of comments, there is a blue button ("Add new comment") which can be used to add a new comment. Each comment in this view displays
 - a comment body on top
 - comment author
 - date of creation of the comment
 - total vote of the comment
-A comment can be upvoted, downvoted, edited or deleted, just like a post.
-At the bottom of the list of comments, there is a blue button ("Add new comment") which can be used to add a new comment
+
 
 ### Creating and editing posts or comments
 By pressing "Add new post" button in the navigation bar, you can open the comment creation page. This page has fields for post title, post body, post author and category. After changing these fields, you can save the post by pressing "Save". If you press "Discard", your changes will be discarded and you will be redirected to the main page of the app. If you leave the author field empty, a default author name ("anonymous") will be used. Similarly, an empty title will be replaced with the text "[No title]".
@@ -64,14 +61,14 @@ None
 
 You can follow the directions below to install and run the app:
 
-* Install Node.js and npm. For more information, please check https://docs.npmjs.com/getting-started/installing-node
+1. Install Node.js and npm. For more information, please check https://docs.npmjs.com/getting-started/installing-node
 
-* To install and start the back end server
+2. To install and start the back end server
 - Make sure you are in the api-server directory
 - Install all project dependencies with `npm install`
 - Run the server with `node server`
 
-* To install and start the front end app
+3. To install and start the front end app
 - Make sure you are in the frontend directory
 - Install all project dependencies with `npm install`
 - Start the development server with `npm run start`
