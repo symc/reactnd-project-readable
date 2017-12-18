@@ -71,7 +71,8 @@ You can follow the directions below to install and run the app:
 3. To install and start the front end app
 - Make sure you are in the frontend directory
 - Install all project dependencies with `npm install`
-- Start the development server with `npm run start`
+- Start the app with `npm run start`
+- Navigate to http://localhost:3000/
 
 ## API Server
 
