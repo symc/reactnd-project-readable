@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { 
     upvoteCommentEverywhere, 
@@ -12,61 +12,59 @@ import PropTypes from 'prop-types';
 /**
 * @description Represents a comment. Each comment has a comment 
 * body, author, a vote score, an upvote button, a downvote button,
-* an edit button and a delete button
-* @constructor
+* an edit button and a delete button. This is a functional stateless
+* component.
 */
-class Comment extends Component {
-    render() {
-        const thisComment = this.props.comment;
-        return (
-            <div>
-                <div className='panel panel-default'>
-                    <div className='panel-heading post-header'>
-                        {thisComment.body}
+const Comment = props => {
+    const thisComment = props.comment;
+    return (
+        <div>
+            <div className='panel panel-default'>
+                <div className='panel-heading post-header'>
+                    {thisComment.body}
+                </div>
+                <div className='row post-banner'>
+                    <div className='col-md-1 post-author'>
+                        {thisComment.author}
                     </div>
-                    <div className='row post-banner'>
-                        <div className='col-md-1 post-author'>
-                            {thisComment.author}
-                        </div>
-                        <div className='col-md-3'>
-                            {dateString(thisComment.timestamp)}
-                        </div>
-                        <div className='col-md-1'>
-                            Vote: {thisComment.voteScore}
-                        </div>
-                        <div className='col-md-1'>
-                            <button
-                                className='btn btn-success btn-sm post-button'
-                                onClick={() => this.props.upvoteCommentEverywhere(thisComment.id)}
-                            >
-                                +
-                            </button>
-                            <button 
-                                className='btn btn-danger btn-sm post-button'
-                                onClick={() => this.props.downvoteCommentEverywhere(thisComment.id)}
-                            >
-                                -
-                            </button>
-                        </div>
-                        <div className='col-md-3'>
-                            <Link
-                                className='btn btn-success btn-sm post-button'
-                                to={`/editcomment/${thisComment.id}`}
-                            >
-                                EDIT
-                            </Link>
-                            <button 
-                                className='btn btn-danger btn-sm post-button'
-                                onClick={() => this.props.deleteCommentEverywhere(thisComment)}
-                            >
-                                DELETE
-                            </button>
+                    <div className='col-md-3'>
+                        {dateString(thisComment.timestamp)}
                     </div>
+                    <div className='col-md-1'>
+                        Vote: {thisComment.voteScore}
                     </div>
+                    <div className='col-md-1'>
+                        <button
+                            className='btn btn-success btn-sm post-button'
+                            onClick={() => props.upvoteCommentEverywhere(thisComment.id)}
+                        >
+                            +
+                        </button>
+                        <button 
+                            className='btn btn-danger btn-sm post-button'
+                            onClick={() => props.downvoteCommentEverywhere(thisComment.id)}
+                        >
+                            -
+                        </button>
+                    </div>
+                    <div className='col-md-3'>
+                        <Link
+                            className='btn btn-success btn-sm post-button'
+                            to={`/editcomment/${thisComment.id}`}
+                        >
+                            EDIT
+                        </Link>
+                        <button 
+                            className='btn btn-danger btn-sm post-button'
+                            onClick={() => props.deleteCommentEverywhere(thisComment)}
+                        >
+                            DELETE
+                        </button>
+                </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 /**

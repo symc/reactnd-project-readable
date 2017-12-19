@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Comment from './Comment';
 import { Link } from 'react-router-dom';
@@ -7,34 +7,32 @@ import PropTypes from 'prop-types';
 
 /**
 * @description Represents a list of comments. Each list encapsulates
-* a collection of comments and a button to add new comments.
-* @constructor
+* a collection of comments and a button to add new comments. This is
+* a functional stateless component.
 */
-class CommentList extends Component {
-    render() {
-        const commentIds = this.props.commentList;
-        const currentPath = this.props.location.pathname;
-        const newCommentPath = currentPath + '/newcomment';
-        return (
-            <div>
-                <div className='panel panel-warning'>
-                    <div className='panel-heading post-header'>Comments</div>
-                    <div className='panel-body'>
-                        {commentIds.map((id) => (
-                            <Comment key={id} id={id} />
-                        ))}
-                    </div>
-                    <Link
-                        className='btn btn-primary add-comment-button'
-                        to={newCommentPath}
-                    >
-                        Add new comment
-                    </Link>
+const CommentList = props => {
+    const commentIds = props.commentList;
+    const currentPath = props.location.pathname;
+    const newCommentPath = currentPath + '/newcomment';
+    return (
+        <div>
+            <div className='panel panel-warning'>
+                <div className='panel-heading post-header'>Comments</div>
+                <div className='panel-body'>
+                    {commentIds.map((id) => (
+                        <Comment key={id} id={id} />
+                    ))}
                 </div>
+                <Link
+                    className='btn btn-primary add-comment-button'
+                    to={newCommentPath}
+                >
+                    Add new comment
+                </Link>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 /**
 * @description mapStateToProps method of CommentList component

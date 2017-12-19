@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -6,18 +6,16 @@ import PropTypes from 'prop-types';
 /**
 * @description Represents a category button. On clicking, this button
 * navigates to a page which list the posts under this category.
-* @constructor
+* This is a functional stateless component.
 */
-class Category extends Component {
-    render() {
-        const thisCategory = this.props.category;
-        const categoryPage = `/${thisCategory.name}`;
-        return (
-            <Link to={categoryPage} className='btn btn-primary btn-sml navbar-btn'>
-                {thisCategory.name}
-            </Link>
-        );
-    }
+const Category = props => {
+    const thisCategory = props.category;
+    const categoryPage = `/${thisCategory.name}`;
+    return (
+        <Link to={categoryPage} className='btn btn-primary btn-sml navbar-btn'>
+            {thisCategory.name}
+        </Link>
+    );
 }
 
 /**
