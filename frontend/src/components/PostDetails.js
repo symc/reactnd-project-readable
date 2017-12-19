@@ -4,8 +4,7 @@ import { withRouter } from 'react-router';
 import Post from './Post';
 import CommentList from './CommentList';
 import NotFound from './NotFound';
-import axiosHelpers from '../utils/axiosHelpers';
-import { updateComments } from '../actions';
+import { fetchComments } from '../actions';
 
 /**
 * @description Represents a detailed view of a post. In contrast to the
@@ -21,22 +20,8 @@ class PostDetails extends Component {
     * are not already in the redux store
     */
     componentDidMount() {
-        // Get the comments of the current post from the back end
-        axiosHelpers.getComments(this.props.match.params.id).then((response) => {
-            // then construct an object containing these posts
-            let comments = {};
-            response.data.forEach((element) => {
-                comments = {
-                    ...comments,
-                    [element.id]: element
-                };
-            });
-            // and update the redux store
-            this.props.updateComments(comments);
-        }).catch((error) => {
-            window.alert(axiosHelpers.networkErrorComments);
-            console.log(error);
-        });
+        // Fetch the comments
+        this.props.fetchComments(this.props.match.params.id);
     }
     render() {
         // Get the post object being displayed and its category
@@ -62,15 +47,15 @@ class PostDetails extends Component {
 /**
 * @description mapDispatchToProps method of PostDetails
 * Post component is using a redux action:
-* 1) updateComments to update the comments in redux store and
-* add the comments of this post if they are not already in the
-* store
+* 1) fetchComments to get the comment from the server update 
+* the comments in redux store and add the comments of this post 
+* if they are not already in the store
 * @param {Object} dispatch - dispatch object to access actions
 * @returns {Object} - an object with a functioncalling the store action
 */
 function mapDispatchToProps(dispatch) {
     return {
-        updateComments: (comments) => dispatch(updateComments(comments))
+        fetchComments: (id) => dispatch(fetchComments(id))
     };
 }
 

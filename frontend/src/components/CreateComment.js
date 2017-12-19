@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addComment, increasePostCommentCount } from '../actions';
+import { createComment } from '../actions';
 import { withRouter } from 'react-router';
 import NotFound from './NotFound';
-import axiosHelpers from '../utils/axiosHelpers';
 
 /**
 * @description Represents a view where a user can create a comment.
@@ -46,16 +45,8 @@ class CreateComment extends Component {
             deleted: false,
             parentDeleted: false
         };
-        // Save the new comment persistently in the back end server
-        axiosHelpers.addComment(newComment).then((response) => {
-            // then save the comment in the redux store
-            this.props.addComment(newComment);
-            // and update the comment count of the parent post
-            this.props.increasePostCommentCount({id: parentId});
-        }).catch((error) => {
-            window.alert(axiosHelpers.networkErrorMessage);
-            console.log(error);
-        });
+        // Save the new comment in the back end server and in the redux store
+        this.props.createComment(newComment);
     };
 
     render() {
@@ -118,16 +109,14 @@ class CreateComment extends Component {
 
 /**
 * @description mapDispatchToProps method of CreateComment
-* CreateComment component is using two redux actions:
-* 1) addComment to add the comment to the redux store
-* 2) increasePostCommentCound to add the comment count of the parent post
+* CreateComment component is using a redux action:
+* 1) createComment to add the comment to the redux store and the server
 * @param {Object} dispatch - dispatch object to access actions
-* @returns {Object} - an object with two functions calling the store actions
+* @returns {Object} - an object with a function calling the store action.
 */
 function mapDispatchToProps(dispatch) {
     return {
-        addComment: (post) => dispatch(addComment(post)),
-        increasePostCommentCount: (id) => dispatch(increasePostCommentCount(id))
+        createComment: (comment) => dispatch(createComment(comment))
     };
 }
 

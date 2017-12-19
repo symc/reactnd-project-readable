@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addComment } from '../actions';
+import { editCommentEverywhere } from '../actions';
 import { withRouter } from 'react-router';
 import NotFound from './NotFound';
-import axiosHelpers from '../utils/axiosHelpers';
 
 /**
 * @description Represents a view where a user can edit a comment.
@@ -35,14 +34,7 @@ class EditComment extends Component {
         thisComment.body = commentBody;
         thisComment.author = author;
         thisComment.timestamp = timestamp;
-        // Save the edited comment persistently in the back end
-        axiosHelpers.editComment(thisComment, thisComment.id).then((response) => {
-            // then, save it to the redux store
-            this.props.addComment(thisComment);
-        }).catch((error) => {
-            window.alert(axiosHelpers.networkErrorMessage);
-            console.log(error);
-        });
+        this.props.editCommentEverywhere(thisComment);
     };
 
     render() {
@@ -117,13 +109,13 @@ class EditComment extends Component {
 /**
 * @description mapDispatchToProps method of EditComment
 * EditComment component is using a redux action:
-* 1) addComment to add the comment to the redux store
+* 1) editCommentEverywhere to add the comment to the redux store and the server
 * @param {Object} dispatch - dispatch object to access actions
 * @returns {Object} - an object with a function calling the store action
 */
 function mapDispatchToProps(dispatch) {
     return {
-        addComment: (post) => dispatch(addComment(post))
+        editCommentEverywhere: (post) => dispatch(editCommentEverywhere(post))
     };
 }
 

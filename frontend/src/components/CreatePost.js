@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost } from '../actions';
+import { createPost } from '../actions';
 import { withRouter } from 'react-router';
-import axiosHelpers from '../utils/axiosHelpers';
 import MutablePost from './MutablePost';
 
 /**
@@ -48,14 +47,7 @@ class CreatePost extends Component {
             deleted: false,
             commentCount: 0
         };
-        // Save the new post persistently in the back end server
-        axiosHelpers.addPost(newPost).then((response) => {
-            // then save the post to the redux store
-            this.props.addPost(newPost)
-        }).catch((error) => {
-            window.alert(axiosHelpers.networkErrorMessage);
-            console.log(error);
-        });
+        this.props.createPost(newPost);
     };
 
     render() {
@@ -87,14 +79,13 @@ class CreatePost extends Component {
 /**
 * @description mapDispatchToProps method of CreatePost
 * CreatePost component is using a redux actions:
-* 1) addPost to add the post to the redux store
+* 1) createPost to add the post to the redux store and the server
 * @param {Object} dispatch - dispatch object to access actions
 * @returns {Object} - an object with a function calling the store action
 */
 function mapDispatchToProps(dispatch) {
     return {
-        addPost: (post, createId) => 
-            dispatch(addPost(post, createId))
+        createPost: (post) => dispatch(createPost(post))
     };
 }
 

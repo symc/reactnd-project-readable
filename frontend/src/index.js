@@ -8,6 +8,7 @@ import { createStore, applyMiddleware,compose } from 'redux';
 import reducer from './reducers';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 import { BrowserRouter } from 'react-router-dom';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -15,7 +16,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
     reducer,
     composeEnhancers(
-        applyMiddleware(logger)
+        applyMiddleware(logger, thunk)
     )
 );
 

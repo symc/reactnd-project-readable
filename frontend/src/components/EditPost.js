@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost } from '../actions';
+import { editPostEverywhere } from '../actions';
 import { withRouter } from 'react-router';
 import NotFound from './NotFound';
-import axiosHelpers from '../utils/axiosHelpers';
 import MutablePost from './MutablePost';
 
 /**
@@ -34,14 +33,7 @@ class EditPost extends Component {
         thisPost.author = author;
         thisPost.category = category;
         thisPost.timestamp = timestamp;
-        // Save the edited post persistently in the back end
-        axiosHelpers.addPost(thisPost).then((response) => {
-            // then, save it to the redux store
-            this.props.addPost(thisPost)
-        }).catch((error) => {
-            window.alert(axiosHelpers.networkErrorMessage);
-            console.log(error);
-        });
+        this.props.editPostEverywhere(thisPost);
     };
 
     render() {
@@ -88,14 +80,13 @@ class EditPost extends Component {
 /**
 * @description mapDispatchToProps method of EditPost
 * EditPost component is using a redux action:
-* 1) addPost to add the comment to the redux store
+* 1) editPostEverywhere to add the comment to the redux store and the server
 * @param {Object} dispatch - dispatch object to access actions
 * @returns {Object} - an object with a function calling the store action
 */
 function mapDispatchToProps(dispatch) {
     return {
-        addPost: (post, createId) => 
-            dispatch(addPost(post, createId))
+        editPostEverywhere: (post) => dispatch(editPostEverywhere(post))
     };
 }
 

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { upvoteComment, downvoteComment, deleteComment } from '../actions';
-import { decreasePostCommentCount} from '../actions';
+import { 
+    upvoteCommentEverywhere, 
+    downvoteCommentEverywhere, 
+    deleteCommentEverywhere
+} from '../actions';
 import { Link } from 'react-router-dom';
-import axiosHelpers from '../utils/axiosHelpers';
 import { dateString } from '../utils/formatHelpers';
 import PropTypes from 'prop-types';
 
@@ -33,37 +35,15 @@ class Comment extends Component {
                             Vote: {thisComment.voteScore}
                         </div>
                         <div className='col-md-1'>
-                            <button 
+                            <button
                                 className='btn btn-success btn-sm post-button'
-                                onClick={() => {
-                                    // Upvote the comment in the back end
-                                    axiosHelpers.upvoteComment(thisComment.id)
-                                        .then((response) => {
-                                            // then upvote it in the redux store
-                                            this.props.upvoteComment({id: thisComment.id})
-                                        }).catch((error) => {
-                                            window.alert(axiosHelpers.networkErrorMessage);
-                                            console.log(error);
-                                        });
-                                    }
-                                }
+                                onClick={() => this.props.upvoteCommentEverywhere(thisComment.id)}
                             >
                                 +
                             </button>
                             <button 
                                 className='btn btn-danger btn-sm post-button'
-                                onClick={() => {
-                                        // Downvote the comment in the back end
-                                        axiosHelpers.downvoteComment(thisComment.id)
-                                        .then((response) => {
-                                            // then downvote it in the redux store
-                                            this.props.downvoteComment({id: thisComment.id})
-                                        }).catch((error) => {
-                                            window.alert(axiosHelpers.networkErrorMessage);
-                                            console.log(error);
-                                        });
-                                    }
-                                }
+                                onClick={() => this.props.downvoteCommentEverywhere(thisComment.id)}
                             >
                                 -
                             </button>
@@ -77,22 +57,7 @@ class Comment extends Component {
                             </Link>
                             <button 
                                 className='btn btn-danger btn-sm post-button'
-                                onClick={() => {
-                                    // Delete the comment in the back end
-                                    axiosHelpers.deleteComment(thisComment.id)
-                                        .then((response) => {
-                                            // then delete the comment in the redux store
-                                            this.props.deleteComment({id: thisComment.id});
-                                            // and update the post comment count accordingly
-                                            this.props.decreasePostCommentCount(
-                                                {id: thisComment.parentId}
-                                            );
-                                        }).catch((error) => {
-                                            window.alert(axiosHelpers.networkErrorMessage);
-                                            console.log(error);
-                                        });
-                                    }
-                                }
+                                onClick={() => this.props.deleteCommentEverywhere(thisComment)}
                             >
                                 DELETE
                             </button>
@@ -106,20 +71,18 @@ class Comment extends Component {
 
 /**
 * @description mapDispatchToProps method of App
-* App component is using four redux actions:
-* 1) upvoteComment: upvotes the comment object in the redux store
-* 2) downvoteComment: downvotes the comment object in the redux store
-* 3) deleteComment: removes the comment object from the redux store
-* 4) decreasePostCommentCount: decrease the comment count by one
+* App component is using three redux actions:
+* 1) upvoteCommentEverywhere: upvotes the comment object in the redux store and the server
+* 2) downvoteCommentEverywhere: downvotes the comment object in the redux store and the server
+* 3) deleteCommentEverywhere: removes the comment object from the redux store and the server
 * @param {Object} dispatch - dispatch object to access actions
-* @returns {Object} - an object with four functions calling the store actions
+* @returns {Object} - an object with three functions calling the store actions
 */
 function mapDispatchToProps(dispatch) {
     return {
-        upvoteComment: (id) => dispatch(upvoteComment(id)),
-        downvoteComment: (id) => dispatch(downvoteComment(id)),
-        deleteComment: (id) => dispatch(deleteComment(id)),
-        decreasePostCommentCount: (id) => dispatch(decreasePostCommentCount(id))
+        upvoteCommentEverywhere: (id) => dispatch(upvoteCommentEverywhere(id)),
+        downvoteCommentEverywhere: (id) => dispatch(downvoteCommentEverywhere(id)),
+        deleteCommentEverywhere: (comment) => dispatch(deleteCommentEverywhere(comment)),
     };
 }
 

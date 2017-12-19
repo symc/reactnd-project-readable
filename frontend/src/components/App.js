@@ -11,8 +11,7 @@ import NotFound from './NotFound';
 import EditPost from './EditPost';
 import EditComment from './EditComment';
 import '../styles/App.css';
-import axiosHelpers from '../utils/axiosHelpers';
-import { initializePosts, initializeCategories } from '../actions';
+import { fetchPosts, fetchCategories } from '../actions';
 
 /**
 * @description Represents the main component where the app lives
@@ -26,35 +25,10 @@ class App extends Component {
     * the redux store.
     */
     componentDidMount() {
-        // Get categories from the server
-        axiosHelpers.getCategories().then((response) => {
-            let categories = {};
-            response.data['categories'].forEach((element) => {
-                categories = {
-                    ...categories,
-                    [element.name]: element
-                };
-            });
-            // then, initialize categories in redux store
-            this.props.initializeCategories(categories);
-        }).catch((error) => {
-            console.log(error);
-        });
-
-        // Get posts from the server
-        axiosHelpers.getPosts().then((response) => {
-            let posts = {};
-            response.data.forEach((element) => {
-                posts = {
-                    ...posts,
-                    [element.id]: element
-                };
-            });
-            // then, initialize posts in redux store
-            this.props.initializePosts(posts);
-        }).catch((error) => {
-            console.log(error);
-        });
+        // Fetch the categories from the server
+        this.props.fetchCategories();
+        // Fetch the posts from the server
+        this.props.fetchPosts();
     }
 
     render() {
@@ -80,15 +54,17 @@ class App extends Component {
 /**
 * @description mapDispatchToProps method of App
 * App component is using two redux actions:
-* 1) initializePost to initialize the posts in redux store
-* 2) initializeCategories to initialize the categories redux store
+* 1) fetchPost to fetch posts from the server and
+* initialize the posts in redux store
+* 2) fetchCategories to fetch categories from the server and
+* initialize the categories redux store
 * @param {Object} dispatch - dispatch object to access actions
 * @returns {Object} - an object with two functions calling the store actions
 */
 function mapDispatchToProps(dispatch) {
     return {
-        initializePosts: (posts) => dispatch(initializePosts(posts)),
-        initializeCategories: (categories) => dispatch(initializeCategories(categories))
+        fetchPosts: () => dispatch(fetchPosts()),
+        fetchCategories: () => dispatch(fetchCategories())
     };
 }
 

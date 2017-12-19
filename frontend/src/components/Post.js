@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { upvotePost, downvotePost, deletePost } from '../actions';
-import axiosHelpers from '../utils/axiosHelpers';
+import { 
+    upvotePostEverywhere, 
+    downvotePostEverywhere, 
+    deletePostEverywhere 
+} from '../actions';
 import {commentString, dateString} from '../utils/formatHelpers';
 import PropTypes from 'prop-types';
 
@@ -44,35 +47,13 @@ class Post extends Component {
                         </div>
                         <button 
                             className='btn btn-success btn-sm post-button'
-                            onClick={() => {
-                                    // Upvote the post in the back end
-                                    axiosHelpers.upvotePost(thisPost.id)
-                                    .then((response) => {
-                                        // then, upvote it in the redux store
-                                        this.props.upvotePost({id: thisPost.id})
-                                    }).catch((error) => {
-                                        window.alert(axiosHelpers.networkErrorMessage);
-                                        console.log(error);
-                                    });
-                                }
-                            }
+                            onClick={() => this.props.upvotePostEverywhere(thisPost.id)}
                         >
                             +
                         </button>
                         <button 
                             className='btn btn-danger btn-sm post-button'
-                            onClick={() => {
-                                    // Downvote a post in the back end
-                                    axiosHelpers.downvotePost(thisPost.id)
-                                    .then((response) => {
-                                        // then, downvote it in the redux store
-                                        this.props.downvotePost({id: thisPost.id})
-                                    }).catch((error) => {
-                                        window.alert(axiosHelpers.networkErrorMessage);
-                                        console.log(error);
-                                    });
-                                }
-                            }
+                            onClick={() => this.props.downvotePostEverywhere(thisPost.id)}
                         >
                             -
                         </button>
@@ -95,18 +76,7 @@ class Post extends Component {
                         </Link>                       
                         <button 
                             className='btn btn-danger btn-sm post-button'
-                            onClick={() => {
-                                    // Delete a post from the back end
-                                    axiosHelpers.deletePost(thisPost.id)
-                                    .then((response) => {
-                                        // then delete it from the redux store
-                                        this.props.deletePost({id: thisPost.id})
-                                    }).catch((error) => {
-                                        window.alert(axiosHelpers.networkErrorMessage);
-                                        console.log(error);
-                                    });
-                                }
-                            }
+                            onClick={() => this.props.deletePostEverywhere(thisPost.id)}
                         >
                             DELETE
                         </button>
@@ -128,9 +98,9 @@ class Post extends Component {
 */
 function mapDispatchToProps(dispatch) {
     return {
-        upvotePost: (id) => dispatch(upvotePost(id)),
-        downvotePost: (id) => dispatch(downvotePost(id)),
-        deletePost: (id) => dispatch(deletePost(id))
+        upvotePostEverywhere: (id) => dispatch(upvotePostEverywhere(id)),
+        downvotePostEverywhere: (id) => dispatch(downvotePostEverywhere(id)),
+        deletePostEverywhere: (id) => dispatch(deletePostEverywhere(id))
     };
 }
 

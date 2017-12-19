@@ -33,6 +33,9 @@ const axiosHelpers = {
     addPost: (post) => {
         return axios.post(baseURL + '/posts', post, config);
     },
+    editPost: (post) => {
+        return axios.put(baseURL + `/posts/${post.id}`, post, config);
+    },
     addComment: (comment) => {
         return axios.post(baseURL + '/comments', comment, config);
     },
